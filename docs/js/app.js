@@ -233,7 +233,7 @@ const frame = document.querySelector("iframe");
 
 openModalButton.addEventListener("click", function(e) {
   e.preventDefault();
-  frame.src = "/tour/";
+  frame.src = "tour/";
   modal.style.display = "flex";
 });
 
