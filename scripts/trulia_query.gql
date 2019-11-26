@@ -1,0 +1,100 @@
+query WEB_searchMapMarkerHomes($searchDetails: SEARCHDETAILS_Input!) {
+  mapMarkerHomes: searchHomesByDetails(searchDetails: $searchDetails) {
+    homes {
+      location {
+        homeFormattedAddress: formattedLocation
+        neighborhoodName
+        coordinates {
+          latitude
+          longitude
+        }
+      }
+      url
+      metadata {
+        compositeId
+      }
+      bathrooms {
+        summaryBathrooms: formattedValue(formatType: COMMON_ABBREVIATION)
+      }
+      bedrooms {
+        summaryBedrooms: formattedValue(formatType: COMMON_ABBREVIATION)
+      }
+      floorSpace {
+        formattedDimension
+      }
+      pageText {
+        title
+      }
+      price {
+        formattedPrice
+      }
+      priceChange {
+        priceChangeDirection
+      }
+      description {
+        value
+      }
+      features {
+        attributes {
+          formattedValue
+          ... on HOME_FeatureAttributeGenericNameValue {
+            formattedName
+          }
+          ... on HOME_FeatureAttributeLink {
+            formattedName
+            linkURL
+          }
+        }
+        additionalLinks {
+          virtualTour {
+            formattedName
+            linkURL
+          }
+        }
+      }
+      ... on HOME_Details {
+        ... on HOME_Property {
+          propertyType {
+            formattedValue
+          }
+          hoaFee {
+            ... on HOME_HoaFee {
+              period
+              amount {
+                price
+              }
+            }
+          }
+        }
+      }
+      media {
+        photos {
+          url {
+            src: custom(size: { width: 2048, height: 1536 })
+          }
+        }
+      }
+      provider {
+        providerHeader
+        providerTitle
+        agent {
+          name
+          phone
+        }
+        broker {
+          name
+          phone
+          email
+          logoUrl
+          url
+        }
+        mls {
+          name
+          logoUrl
+        }
+        description
+        youtubeUrl
+      }
+    }
+  }
+}
