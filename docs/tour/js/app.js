@@ -153,8 +153,8 @@ async function init() {
   camera.position.set(0, 0, 0);
 
   const ambientLight = new THREE.HemisphereLight(
-    0xffffff, // ground color
     0x000000, // sky color
+    0xffffff, // ground color
     // 0xddeeff, // sky color
     // 0x202020, // ground color
     4.5 // intensity
@@ -166,12 +166,17 @@ async function init() {
 
   scene.add(ambientLight);
 
-  // const directionalLight1 = new THREE.DirectionalLight( 0xF7EFBE, 0.7 );
-  // directionalLight1.position.set( 0.5, 1, 0.5 );
-  // scene.add( directionalLight1 );
-  // const directionalLight2 = new THREE.DirectionalLight( 0xF7EFBE, 0.5 );
-  // directionalLight2.position.set( -0.5, -1, -0.5 );
-  // scene.add( directionalLight2 );
+  const directionalLight = new THREE.DirectionalLight( 0xF7EFBE, 0.7 );
+  directionalLight.position.set( 0.5, 1, 0.5 );
+  scene.add( directionalLight );
+
+  const spotLight = new THREE.SpotLight(0xffffff, 1);
+  spotLight.position.set(15, 40, 35);
+  spotLight.angle = Math.PI / 4;
+  spotLight.penumbra = 0.05;
+  spotLight.decay = 2;
+  spotLight.distance = 200;
+  scene.add(spotLight);
 
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
@@ -229,9 +234,17 @@ async function init() {
     }),
   ];
 
+  const testMat = new THREE.MeshStandardMaterial({
+    color: 0x878787,
+    roughness: 0.5,
+    metalness: 0.5,
+    emissive: 0x000000,
+  });
+
   towerMesh.traverse(o => {
     if (o.isMesh) {
-      o.material = mats[Math.floor(Math.random() * mats.length)];
+      // o.material = mats[Math.floor(Math.random() * mats.length)];
+      o.material = testMat;
 
       // you can play around with each floorplan's position/rotation below
       // o.order = o.position.y / 9;
@@ -327,13 +340,11 @@ async function init() {
 
   player = new Player();
 
-
   {
     function addGuiColor(gui, obj, prop) {
       const data = {};
       data[prop] = obj[prop].getHex();
       gui.addColor(data, prop).onChange(handleColorChange(obj[prop]));
-
     }
 
     function handleColorChange(color) {
@@ -354,11 +365,37 @@ async function init() {
     addGuiColor(ambFolder, ambientLight, "groundColor");
     ambFolder.open();
 
+    const dirFolder = gui.addFolder("Directional Light");
+    addGuiColor(dirFolder, directionalLight, "color");
+    dirFolder.add(directionalLight, "intensity", 0, 2);
+    dirFolder.add(directionalLight.position, "x", -100, 100);
+    dirFolder.add(directionalLight.position, "y", -100, 100);
+    dirFolder.add(directionalLight.position, "z", -100, 100);
+    dirFolder.open();
+
+    const spotFolder = gui.addFolder("Spot Light");
+    addGuiColor(spotFolder, spotLight, "color");
+    spotFolder.add(spotLight, "intensity", 0, 2);
+    spotFolder.add(spotLight, "distance", 0, 1000);
+    spotFolder.add(spotLight, "angle", 0, 2);
+    spotFolder.add(spotLight, "penumbra", 0, 1);
+    spotFolder.add(spotLight, "decay", 1, 2);
+    spotFolder.add(spotLight.position, "x", -1000, 1000);
+    spotFolder.add(spotLight.position, "y", -1000, 1000);
+    spotFolder.add(spotLight.position, "z", -1000, 1000);
+    spotFolder.open();
+
+    const matFolder = gui.addFolder("Material");
+    matFolder.add(testMat, "roughness", 0, 1);
+    matFolder.add(testMat, "metalness", 0, 1);
+    addGuiColor(matFolder, testMat, "color");
+    addGuiColor(matFolder, testMat, "emissive");
+    matFolder.open();
+
     // const outlineFolder = gui.addFolder("Outline");
     // outlineFolder.add(effect, "edgeThickness", 0, 5);
     // outlineFolder.open();
   }
-
 }
 
 function animate() {
