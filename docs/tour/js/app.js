@@ -170,6 +170,10 @@ async function init() {
   directionalLight.position.set( 0.5, 1, 0.5 );
   scene.add( directionalLight );
 
+  const directionalLight2 = new THREE.DirectionalLight( 0xFFFFFF, 0.7 );
+  directionalLight.position.set( 0.5, 1, 0.5 );
+  scene.add( directionalLight2 );
+
   const spotLight = new THREE.SpotLight(0xffffff, 1);
   spotLight.position.set(15, 40, 35);
   spotLight.angle = Math.PI / 4;
@@ -186,7 +190,7 @@ async function init() {
 
   // the outline effect
   effect = new THREE.OutlineEffect(renderer, {
-    defaultThickness: 0.002,
+    defaultThickness: 0.004,
     defaultColor: [0, 0, 0],
     defaultAlpha: 0.9,
     defaultKeepAlive: true,
@@ -368,10 +372,18 @@ async function init() {
     const dirFolder = gui.addFolder("Directional Light");
     addGuiColor(dirFolder, directionalLight, "color");
     dirFolder.add(directionalLight, "intensity", 0, 2);
-    dirFolder.add(directionalLight.position, "x", -100, 100);
-    dirFolder.add(directionalLight.position, "y", -100, 100);
-    dirFolder.add(directionalLight.position, "z", -100, 100);
+    dirFolder.add(directionalLight.position, "x", -10, 10);
+    dirFolder.add(directionalLight.position, "y", -10, 10);
+    dirFolder.add(directionalLight.position, "z", -10, 10);
     dirFolder.open();
+
+    const dirFolder2 = gui.addFolder("Directional Light 2");
+    addGuiColor(dirFolder2, directionalLight2, "color");
+    dirFolder2.add(directionalLight2, "intensity", 0, 2);
+    dirFolder2.add(directionalLight2.position, "x", -10, 10);
+    dirFolder2.add(directionalLight2.position, "y", -10, 10);
+    dirFolder2.add(directionalLight2.position, "z", -10, 10);
+    dirFolder2.open();
 
     const spotFolder = gui.addFolder("Spot Light");
     addGuiColor(spotFolder, spotLight, "color");
