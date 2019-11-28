@@ -14,9 +14,9 @@ vidpy.config.MELT_BINARY = "melt"
 
 def download_videos():
 
-    # a non-exaustive list of youtube channels/search patterns for NY real estate 
+    # a non-exaustive list of youtube channels/search patterns for NY real estate
     vid_lists = [
-        ("https://www.youtube.com/playlist?list=PLqIkTqVWbg2-2uL2z5YhV2KvgueWp91GI", None)
+        ("https://www.youtube.com/playlist?list=PLqIkTqVWbg2-2uL2z5YhV2KvgueWp91GI", None),
         ("https://www.youtube.com/user/thecorcorangroup/", "^[\d].*?(NY|New York)"),
         ("https://www.youtube.com/channel/UCOJzEialegEtLZJTLPRJVng/videos", "^[\d].*?(NY|New York)"),
         ("https://www.youtube.com/user/ellimanvideo/", "^[\d]"),
@@ -26,6 +26,7 @@ def download_videos():
 
     for vid, pattern in vid_lists:
         args = ["youtube-dl", vid, "-i", "-f", "22"]
+        args += ["--skip-download", "--write-auto-sub"]
         if pattern:
             args += ["--match-title", pattern]
         call(args)
@@ -143,9 +144,6 @@ def combine(files=None, maxfiles=180000, outname="home_invader.mp4"):
             files.append(f)
             prevname = basename
 
-        for f in files:
-            print(f)
-
         random.shuffle(files)
 
         files = files[0:maxfiles]
@@ -211,7 +209,8 @@ def main():
 if __name__ == "__main__":
     # main()
     # import sys
-    combine()
+    # combine()
+    download_videos()
 
     # combine(sys.argv[1:])
     # args = sys.argv[1:]
