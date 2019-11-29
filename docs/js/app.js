@@ -29,6 +29,80 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+Vue.component("slideshow", {
+  template: `
+    <div class="image-app" @mouseover="pause">
+      <div
+        class="images-holder"
+        :style="{backgroundImage: 'url(' + image + ')'}"
+      >
+        <button class="image-nav" @click="prev"><span><</span></button>
+        <button class="image-nav" @click="next"><span>></span></button>
+      </div>
+
+      <div class="image-cats-holder" v-cloak>
+        <span class="image-cat">{{cat}}</span>
+        <span class="image-counts">{{index + 1}} of {{images.length}}</span>
+      </div>
+    </div>`,
+  props: {
+    images: {
+      type: Array,
+      required: true,
+    },
+    cat: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      index: 0,
+      timer: Math.floor(Math.random() * 1000) + 500,
+      playing: false,
+    };
+  },
+  created() {
+    if (this.playing) {
+      this.timeout = setTimeout(this.next, this.timer);
+    }
+    this.preload(this.index + 1);
+  },
+  methods: {
+    next() {
+      this.index++;
+      if (this.index >= this.images.length) {
+        this.images = 0;
+      }
+      this.preload(this.index + 1);
+      if (this.playing) {
+        this.timeout = setTimeout(this.next, this.timer);
+      }
+    },
+    prev() {
+      this.index--;
+      if (this.index < 0) {
+        this.images = this.images.length - 1;
+      }
+    },
+    preload(i) {
+      if (this.images[i]) {
+        let nextImage = new Image();
+        nextImage.src = imgBase + this.images[i];
+      }
+    },
+    pause() {
+      this.playing = false;
+      clearTimeout(this.timeout);
+    }
+  },
+  computed: {
+    image() {
+      return imgBase + this.images[this.index];
+    },
+  },
+});
+
 const ImageApp = new Vue({
   el: "#image-app",
   data: {
@@ -47,12 +121,13 @@ const ImageApp = new Vue({
     for (let c of this.cats) {
       shuffleArray(allImages[c]);
     }
-    this.cat = this.cats[0];
-    this.images = allImages[this.cats[0]];
-    this.setImage(0);
-    this.loading = false;
-    this.autoplay = true;
-    this.startTimer();
+    this.images = allImages;
+    // this.cat = this.cats[0];
+    // this.images = allImages[this.cats[0]];
+    // this.setImage(0);
+    // this.loading = false;
+    // this.autoplay = true;
+    // this.startTimer();
   },
 
   methods: {

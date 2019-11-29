@@ -16,30 +16,8 @@
       <iframe src=""></iframe>
       <a href="#" id="close-modal">Close</a>
     </div>
+
     <div class="container">
-      <section id="image-app-container">
-        <div id="image-app" @mouseover="stopTimer">
-          <div
-            class="images-holder"
-            :style="{backgroundImage: 'url(' + image + ')'}"
-          >
-            <p v-if="loading">Loading</p>
-
-            <button class="image-nav" @click="prev"><span><</span></button>
-            <button class="image-nav" @click="next"><span>></span></button>
-          </div>
-
-          <div class="image-cats-holder" v-cloak>
-            <select v-model="cat" @change="update">
-              <option v-for="option in cats" v-bind:value="option">
-                {{ option }}
-              </option>
-            </select>
-            <span class="image-counts">{{index + 1}} of {{images.length}}</span>
-          </div>
-        </div>
-      </section>
-
       <section id="meta-container">
         <h1 id="logo">New York Apartment</h1>
         <h2 id="total-price">
@@ -53,7 +31,6 @@
           <p>302,976,590 Square Feet</p>
           <p>$32,287,410 Monthly Fees</p>
         </div>
-
         <p id="neighborhoods">
           Located in Annadale, Arden Heights, Arrochar, Arverne, Astoria
           Heights, Astoria, Auburndale, Bath Beach, Battery Park, Bay Ridge, Bay
@@ -106,6 +83,12 @@
           Whitestone, Williamsbridge, Williamsburg, Willowbrook, Windsor
           Terrace, Wingate, Woodhaven, Woodlawn, Woodrow, and Woodside.
         </p>
+      </section>
+
+      <section id="image-app-container">
+        <div id="image-app" @mouseover="stopTimer">
+          <slideshow v-for="(c, i) in cats" :cat="c" :images="images[c]" />
+        </div>
       </section>
 
       <section>
@@ -5300,15 +5283,26 @@
           <h3>3D virtual tour</h3>
           <a href="#virtual-tour" id="open-tour"><img src="images/floorplan.jpg" /></a>
         </div>
+      </section>
 
+      <section>
         <div class="inner-section">
           <h3>Video tour</h3>
-          <div style="padding:56.25% 0 0 0;position:relative;">
-            <iframe src="https://player.vimeo.com/video/182243398?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-          </div>
-          <script src="https://player.vimeo.com/api/player.js"></script>
+          <!-- <div style="padding:56.25% 0 0 0;position:relative;"> -->
+          <!--   <iframe src="https://player.vimeo.com/video/182243398?title=0&#38;byline=0&#38;portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
+          <!-- </div> -->
+          <!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
+          <!-- <video controls src="videos/home_invader.mp4" autoplay></video> -->
+          <video controls src="videos/the_apartment.mp4" autoplay></video>
+          <video controls src="videos/living_room.mp4" autoplay></video>
+          <video controls src="videos/dining_room.mp4" autoplay></video>
+          <video controls src="videos/master_bedroom.mp4" autoplay></video>
+          <video controls src="videos/bathroom.mp4" autoplay></video>
+          <video controls src="videos/stainless_steel.mp4" autoplay></video>
         </div>
+      </section>
 
+      <section>
         <div class="inner-section">
           <h3>Mortgage calculator</h3>
           <div id="calculator-app" class="has-bg">
@@ -5323,12 +5317,20 @@
             <p>Total Monthly Payment: $<animated-integer :value="monthly" /> </p>
           </div>
         </div>
+      </section>
 
+      <section>
         <div class="inner-section">
           <h3>Market outlook</h3>
-          <img src="images/market.jpg" />
+          <img src="images/co2.png" />
+          <img src="images/gdp.png" />
+          <img src="images/monthly-earnings.png" />
+          <img src="images/rents-homelessness.png" />
+          <img src="images/sea-level-change.png" />
         </div>
+      </section>
 
+      <section>
         <div class="inner-section">
           <div id="contact-app">
             <h3>Contact {{agents.length}} real estate agents</h3>
@@ -5340,7 +5342,9 @@
             </div>
           </div>
         </div>
+      </section>
 
+      <section>
         <div class="inner-section">
           <h3>Features</h3>
           <ul id="features-list">
