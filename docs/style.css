@@ -10,6 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font: 16px arial;
+  font-family: "Times New Roman";
   background-color: #eee;
   height: 100%;
 }
@@ -18,6 +19,11 @@ h1,
 h2,
 h3 {
   margin-top: 0;
+}
+
+h3 {
+  font-size: 29px;
+  font-weight: normal;
 }
 
 .container {
@@ -35,7 +41,7 @@ h3 {
 }
 
 #logo {
-  font-size: 40px;
+  font-size: 50px;
   text-transform: uppercase;
   font-weight: normal;
   margin: 0;
@@ -51,7 +57,13 @@ h3 {
 }
 
 .meta {
-  font-size: 20px;
+  font-size: 29px;
+  line-height: 1.4;
+  margin-top: 17px;
+}
+
+.meta p {
+  margin: 0;
 }
 
 #image-app-container {
@@ -69,7 +81,7 @@ h3 {
   flex: 1;
   flex-direction: column;
   width: 100%;
-  height: 400px;
+  height: 500px;
   margin-bottom: 20px;
 }
 
@@ -86,7 +98,7 @@ h3 {
   background-position: center;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .image-cats-holder {
@@ -139,24 +151,66 @@ section {
   margin: 0px 10px;
 }
 
+#meta-container {
+  min-width: 25vw;
+}
+
+#image-app-container {
+  min-width: 46vw;
+}
+
+#about-listing-container {
+  min-width: 42vw;
+}
+
+#video-tours-container {
+  min-width: 52vw;
+}
+
 #agent-list {
   margin-top: 10px;
 }
 
 #contact-app button {
   font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#agent-list a {
+  -webkit-appearance: button;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: buttontext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  background-color: buttonface;
+  box-sizing: border-box;
+  margin: 0em;
+  font: 400 11px system-ui;
+  padding: 1px 7px 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  border-image: initial;
+  text-decoration: none;
 }
 
 #agent-list a {
   float: left;
-  margin-right: 2px;
-  margin-bottom: 2px;
-  padding: 3px;
-  font-size: 12px;
-  background-color: #000;
-  color: #fff;
-  text-decoration: none;
-  border: 1px solid transparent;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  /* padding: 3px; */
+  /* font-size: 12px; */
+  /* background-color: #000; */
+  /* color: #fff; */
+  /* text-decoration: none; */
+  /* border: 1px solid transparent; */
 }
 
 #agent-list a:hover {
@@ -183,16 +237,29 @@ section {
   font-size: 12px;
 }
 
-video {
-  width: 100%;
-  display: block;
-  margin-bottom: 20px;
-}
+/* video { */
+/*   width: 100%; */
+/*   display: block; */
+/*   margin-bottom: 20px; */
+/* } */
 
 .responsive-video {
   padding: 56.25% 0 0 0;
   position: relative;
   margin-bottom: 20px;
+}
+
+.vid-holder {
+  width: 50%;
+  padding: 5px;
+  float: left;
+  /* padding-bottom: 0px; */
+  /* padding-top: 0px; */
+}
+
+.vid-holder p {
+  margin: 0;
+  margin-top: -20px;
 }
 
 .responsive-video iframe {
@@ -204,8 +271,8 @@ video {
 }
 
 #features-list {
-  font-size: 13px;
-  column-count: 2;
+  font-size: 14px;
+  column-count: 3;
 }
 
 #modal {
@@ -215,7 +282,7 @@ video {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 60px;
+  padding: 10px;
   z-index: 999;
   flex-direction: column;
   display: none;
@@ -226,6 +293,12 @@ video {
   margin-top: 0;
   margin-bottom: 10px;
   font-weight: normal;
+  font-size: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 #close-modal {
@@ -243,21 +316,39 @@ video {
   display: none;
 }
 
+#calculator-app .total,
+#calculator-app .total input {
+  font-size: 24px;
+  color: #000;
+}
+
+.calculate {
+  font-size: 50px;
+  width: 100%;
+  /* box-shadow: 0px 0px 5px red; */
+  outline: 1px solid black;
+  margin: 30px 0px;
+}
+
+input[type="number"] {
+  width: 3rem;
+}
+
 .slidecontainer {
   width: 100%; /* Width of the outside container */
 }
 
 /* The slider itself */
 .slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
+  -webkit-appearance: none; /* Override default CSS styles */
   appearance: none;
   width: 40%; /* Full-width */
   height: 25px; /* Specified height */
   background: #fe42ad; /* Grey background */
   outline: none; /* Remove outline */
   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
 }
 
 /* Mouse-over effects */

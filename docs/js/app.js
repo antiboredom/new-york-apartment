@@ -72,7 +72,7 @@ Vue.component("slideshow", {
     next() {
       this.index++;
       if (this.index >= this.images.length) {
-        this.images = 0;
+        this.index = 0;
       }
       this.preload(this.index + 1);
       if (this.playing) {
@@ -82,8 +82,9 @@ Vue.component("slideshow", {
     prev() {
       this.index--;
       if (this.index < 0) {
-        this.images = this.images.length - 1;
+        this.index = this.images.length - 1;
       }
+      this.preload(this.index - 1);
     },
     preload(i) {
       if (this.images[i]) {
@@ -94,7 +95,7 @@ Vue.component("slideshow", {
     pause() {
       this.playing = false;
       clearTimeout(this.timeout);
-    }
+    },
   },
   computed: {
     image() {
@@ -241,7 +242,7 @@ Vue.component("animated-integer", {
           {
             tweeningValue: endValue,
           },
-          50000
+          500
         )
         .onUpdate(function() {
           vm.tweeningValue = this.tweeningValue.toFixed(0);
@@ -268,8 +269,8 @@ const CalculatorApp = new Vue({
     salary: 56516,
     repayments: 0,
     payment: 0,
-    dep: 0, 
-    end: 0, 
+    dep: 0,
+    end: 0,
     carbon: null,
     insects: 100,
     totalInterest: 0,
@@ -279,23 +280,29 @@ const CalculatorApp = new Vue({
     calculate() {
       this.resetData();
 
-      this.dep = this.price*(this.down/100);
-      this.mortgage = this.price*(1-(this.down/100));
-      this.payment = ((this.salary*0.67)/12)*0.3
+      this.dep = this.price * (this.down / 100);
+      this.mortgage = this.price - this.dep;
+      this.payment = ((this.salary * 0.67) / 12) * 0.3;
       //(-log(1- i * A / P)) / log (1 + i)
       //this.repayments = -1 * (Math.log(1 - this.r * this.mortgage / this.payment)/Math.log(1 + this.r))
-      this.interestPrinciple = Number(this.mortgage * (this.r/12 * Math.pow(1 + (this.r/12), this.n * this.y) /
-          Math.pow(1 + (this.r/12), this.n * this.y))
-      );
+      const monthlyRate = Number(this.r) / 12;
+      const totalPayments = Number(this.n) * Number(this.y);
+
+      console.log(monthlyRate, totalPayments, this.y);
+
+      this.interestPrinciple =
+        this.mortgage *
+        ((monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) /
+          (Math.pow(1 + monthlyRate, totalPayments) - 1));
+
       this.tax = this.price * 0.0014;
       this.hoa = 32287410;
 
       this.monthly = this.sum(this.tax, this.hoa, this.interestPrinciple);
-      this.totalInterest = (this.monthly*12*30)-this.mortgage;
-      this.end = new Date().getFullYear() + this.y;
-      this.carbon = 408.53 + this.y*2.5;
-      this.insects = 100*(1-Math.pow(0.975, this.y))
-
+      this.totalInterest = this.monthly * totalPayments - this.mortgage;
+      this.end = new Date().getFullYear() + Number(this.y);
+      this.carbon = 408.53 + this.y * 2.5;
+      this.insects = 100 * (1 - Math.pow(0.975, this.y));
     },
 
     resetData() {
