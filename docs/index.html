@@ -5288,17 +5288,49 @@
       <section>
         <div class="inner-section">
           <h3>Video tour</h3>
-          <!-- <div style="padding:56.25% 0 0 0;position:relative;"> -->
-          <!--   <iframe src="https://player.vimeo.com/video/182243398?title=0&#38;byline=0&#38;portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
-          <!-- </div> -->
-          <!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
-          <!-- <video controls src="videos/home_invader.mp4" autoplay></video> -->
-          <video controls src="videos/the_apartment.mp4" autoplay></video>
-          <video controls src="videos/living_room.mp4" autoplay></video>
-          <video controls src="videos/dining_room.mp4" autoplay></video>
-          <video controls src="videos/master_bedroom.mp4" autoplay></video>
-          <video controls src="videos/bathroom.mp4" autoplay></video>
-          <video controls src="videos/stainless_steel.mp4" autoplay></video>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293182?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376295449?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293166?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660169?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293133?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293102?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293145?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376295443?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660147?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660085?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660039?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659994?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659960?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659921?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659883?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659841?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659798?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659767?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659749?byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+          <!-- <video class="autovid" controls src="videos/the_apartment.mp4"></video> -->
+          <!-- <video class="autovid" controls src="videos/living_room.mp4"></video> -->
+          <!-- <video class="autovid" controls src="videos/dining_room.mp4"></video> -->
+          <!-- <video class="autovid" controls src="videos/master_bedroom.mp4"></video> -->
+          <!-- <video class="autovid" controls src="videos/bathroom.mp4"></video> -->
+          <!-- <video class="autovid" controls src="videos/stainless_steel.mp4"></video> -->
+          <script>
+            {
+              function addListener(v) {
+                v.addEventListener('mouseover', () => {
+                  // v.muted = false;
+                  // v.play();
+                });
+                // v.addEventListener('mouseout') {
+                  // v.muted = false;
+                // }
+              }
+              const vids = document.querySelectorAll('.autovid');
+              for (let v of vids) {
+                addListener(v);
+              }
+            }
+          </script>
         </div>
       </section>
 
