@@ -12,6 +12,28 @@ from multiprocessing import Pool
 
 vidpy.config.MELT_BINARY = "melt"
 
+CATS_TO_OMIT = "|".join([
+    "outdoor",
+    "park",
+    "harbor",
+    "beach",
+    "snowfield",
+    "skyscraper",
+    "downtown",
+    "alley",
+    "office_building",
+    "exterior",
+    "porch",
+    "balcony",
+    "pharmacy",
+    "drugstore",
+    "tower",
+    "hospital",
+    "airplane_cabin",
+    "ice_cream_parlor",
+    "clean_room",
+])
+
 def download_videos():
 
     # a non-exaustive list of youtube channels/search patterns for NY real estate
@@ -133,6 +155,22 @@ def combine(files=None, maxfiles=180000, outname="home_invader.mp4"):
         _files = sorted(_files, key=lambda f: (f.split(".mp4_")[0], int(f.split(".mp4_")[1].split(".")[0])))
         files = [None]
 
+        with open('categories_places365.txt', 'r') as infile:
+            classes = infile.readlines()
+        classes = [l.strip().split(' ')[0] for l in classes]
+
+        with open('video_classes.txt', 'r') as infile:
+            lines = infile.readlines()
+        lines = [l.strip().split(':::') for l in lines]
+
+        video_tags = {}
+        for l in lines:
+            vid_class = l[0:-1]
+            vid_class_names = [classes[int(v)] for v in vid_class]
+            vidname = "shots/" + l[-1]
+            video_tags[vidname] = " ".join(vid_class_names)
+
+
         # skip first and last
         prevname = None
         for f in _files:
@@ -141,14 +179,23 @@ def combine(files=None, maxfiles=180000, outname="home_invader.mp4"):
                 prevname = basename
                 files.pop()
                 continue
-            files.append(f)
+
+            tags = video_tags[f]
+            if re.search(CATS_TO_OMIT, tags):
+                prevname = basename
+                continue
+
+            files.append((f, tags))
             prevname = basename
 
+        # return False
         random.shuffle(files)
-
+        # files = sorted(files, key=lambda k: k[1])
         files = files[0:maxfiles]
 
     for f in files:
+        print(f[0], f[1])
+        f = f[0]
         if os.path.exists(f + ".ts"):
             continue
         call(
@@ -169,7 +216,7 @@ def combine(files=None, maxfiles=180000, outname="home_invader.mp4"):
             ]
         )
 
-    files = [f"file '{os.path.abspath(f)}.ts'" for f in files]
+    files = [f"file '{os.path.abspath(f[0])}.ts'" for f in files]
 
     with open("toconcat.txt", "w") as outfile:
         outfile.write("\n".join(files))
@@ -209,8 +256,8 @@ def main():
 if __name__ == "__main__":
     # main()
     # import sys
-    # combine()
-    download_videos()
+    combine()
+    # download_videos()
 
     # combine(sys.argv[1:])
     # args = sys.argv[1:]
