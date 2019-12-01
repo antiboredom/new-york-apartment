@@ -241,7 +241,7 @@ Vue.component("animated-integer", {
           {
             tweeningValue: endValue,
           },
-          500
+          50000
         )
         .onUpdate(function() {
           vm.tweeningValue = this.tweeningValue.toFixed(0);
@@ -256,35 +256,51 @@ const CalculatorApp = new Vue({
   el: "#calculator-app",
   data: {
     price: 47558777359,
-    mortage: 0,
+    mortgage: 0,
     monthly: 0,
-    down: 0,
+    down: 20,
     interestPrinciple: 0,
     tax: 0,
     hoa: 0,
-    n: 12 * 30,
+    n: 12,
     y: 30,
-    r: 4 / 12 / 100,
+    r: 0.04 * 100,
+    salary: 56516,
+    repayments: 0,
+    payment: 0,
+    dep: 0, 
+    end: 0, 
+    carbon: null,
+    insects: 100,
+    totalInterest: 0,
   },
 
   methods: {
     calculate() {
       this.resetData();
 
-      this.down = this.price / 5;
-      this.mortgage = this.price - this.down;
-      this.interestPrinciple = Number(
-        (this.mortgage * (this.r * Math.pow(1 + this.r, this.n * this.y))) /
-          Math.pow(1 + this.r, this.n * this.y)
+      this.dep = this.price*(this.down/100);
+      this.mortgage = this.price*(1-(this.down/100));
+      this.payment = ((this.salary*0.67)/12)*0.3
+      //(-log(1- i * A / P)) / log (1 + i)
+      //this.repayments = -1 * (Math.log(1 - this.r * this.mortgage / this.payment)/Math.log(1 + this.r))
+      this.interestPrinciple = Number(this.mortgage * (this.r/12 * Math.pow(1 + (this.r/12), this.n * this.y) /
+          Math.pow(1 + (this.r/12), this.n * this.y))
       );
       this.tax = this.price * 0.0014;
       this.hoa = 32287410;
+
       this.monthly = this.sum(this.tax, this.hoa, this.interestPrinciple);
+      this.totalInterest = (this.monthly*12*30)-this.mortgage;
+      this.end = new Date().getFullYear() + this.y;
+      this.carbon = 408.53 + this.y*2.5;
+      this.insects = 100*(1-Math.pow(0.975, this.y))
+
     },
 
     resetData() {
       this.monthly = null;
-      this.down = null;
+      this.dep = null;
       this.tax = null;
       this.hoa = null;
     },

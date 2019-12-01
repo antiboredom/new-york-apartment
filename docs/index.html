@@ -5336,24 +5336,38 @@
 
       <section>
         <div class="inner-section">
-          <h3>Mortgage calculator</h3>
+          <h3>Calculators</h3>
           <div id="calculator-app" class="has-bg">
-            <p><input type="text" id="total" value="$46,944,430,086" disabled><button v-on:click="calculate"> Calculate </button>  </p>
-
-            <p>Down payment: $<animated-integer :value="down" /></p>
+            <p>We use machine learning to calculate your monthy repayments on the New York Apartment.</p>
+            <p>Total cost: $<input type="text" id="total" v-model="price" size="15" ></p>
+            <p>Interest rate: <input type="text" id="total" v-model="r" size="4">%
+              <input type="range" min="0" max="100" v-model="r" class="slider" id="myRange" size="4"></p>
+            <p>Loan term: <input type="text" id="total" v-model="y"> years 
+              <input type="range" min="1" max="1000" v-model="y" class="slider" id="myRange" size="4"></p>
+            <p>Down payment: <input type="text" id="total" v-model="down" size="4">%
+              <input type="range" min="1" max="100" v-model="down" class="slider" id="myRange" size="4"></p> 
+            <p>Your Salary: <input type="text" id="total" v-model="salary" size="20"> <input type="range" min="1" max="10000000" v-model="salary" class="slider" id="myRange" size="4"></p>
+            <button v-on:click="calculate"> Calculate </button>
             <h4>Estimated Monthly Payment Breakdown</h4>
-
-            <p>Principle & Interest Monthly Repayment: $<animated-integer :value="interestPrinciple" /></p>
             <p>Property tax: $<animated-integer :value="tax" /></p>
             <p>HOA: $<animated-integer :value="hoa" /></p>
+            <p>Interest and principle: $<animated-integer :value="interestPrinciple" /> </p>
             <p>Total Monthly Payment: $<animated-integer :value="monthly" /> </p>
+            <h4>Estimated Totals</h4>
+            <p>Total Principal Paid: $<animated-integer :value="mortgage" /> </p>
+            <p>Total Interest Paid: $<animated-integer :value="totalInterest" /> </p>
+            <p>Mortgage payoff date: {{end}}</p>
+            <p>Estimated CO2 at mortgage payoff date: {{carbon}} ppm</p>
+            <p>Insect population flux compared total yr 2000: <animated-integer :value="insects" />%</p>
+
+
           </div>
         </div>
       </section>
 
       <section>
         <div class="inner-section">
-          <h3>Market outlook</h3>
+          <h3>Outlook</h3>
           <img src="images/co2.png" />
           <img src="images/gdp.png" />
           <img src="images/monthly-earnings.png" />
