@@ -9,6 +9,7 @@ let prevTime = performance.now();
 let delta = 0;
 let towerMesh;
 let effect;
+let composer;
 
 let loader = new THREE.GLTFLoader();
 let dracoLoader = new THREE.DRACOLoader();
@@ -138,8 +139,9 @@ async function init() {
   player = new Player();
   scene = new THREE.Scene();
 
-  const dist = 5000;
-  const bg = 0xeeffff;
+  const dist = 2000;
+  // const bg = 0xeeffff;
+  const bg = 0x555555;
   const fov = 25;
   const aspect = container.clientWidth / container.clientHeight;
   const near = 1;
@@ -166,13 +168,13 @@ async function init() {
 
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight( 0xF7EFBE, 0.7 );
-  directionalLight.position.set( 0.5, 1, 0.5 );
-  scene.add( directionalLight );
+  const directionalLight = new THREE.DirectionalLight(0xf7efbe, 0.7);
+  directionalLight.position.set(0.5, 1, 0.5);
+  scene.add(directionalLight);
 
-  const directionalLight2 = new THREE.DirectionalLight( 0xFFFFFF, 0.7 );
-  directionalLight.position.set( 0.5, 1, 0.5 );
-  scene.add( directionalLight2 );
+  const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.7);
+  directionalLight.position.set(0.5, 1, 0.5);
+  scene.add(directionalLight2);
 
   const spotLight = new THREE.SpotLight(0xffffff, 1);
   spotLight.position.set(15, 40, 35);
@@ -184,9 +186,34 @@ async function init() {
 
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement);
 
   // this removes the background alltogether...
   // renderer.setClearColor(0x000000, 0);
+
+  composer = new THREE.EffectComposer(renderer);
+
+  // const renderPass = new THREE.RenderPass(scene, camera);
+  // composer.addPass(renderPass);
+
+  const ssaoPass = new THREE.SSAOPass(
+    scene,
+    camera,
+    container.clientWidth,
+    container.clientHeight
+  );
+  ssaoPass.kernelRadius = 16;
+  // composer.addPass(ssaoPass);
+
+  // const bokehPass = new THREE.BokehPass(scene, camera, {
+  //   focus: 0.1,
+  //   aperture: 0.25,
+  //   maxblur: 0.01,
+  //   width: container.clientWidth,
+  //   height: container.clientHeight,
+  // });
+  // composer.addPass(bokehPass);
 
   // the outline effect
   effect = new THREE.OutlineEffect(renderer, {
@@ -195,6 +222,12 @@ async function init() {
     defaultAlpha: 0.9,
     defaultKeepAlive: true,
   });
+
+  // const outlinePass = new THREE.OutlinePass( new THREE.Vector2( container.clientWidth, container.clientHeight ), scene, camera );
+  // outlinePass.edgeStrength = 3.0;
+  // outlinePass.edgeThickness = 1.0;
+  // outlinePass.visibleEdgeColor = 0xFF0000;
+  // composer.addPass( outlinePass );
 
   controls = new THREE.PointerLockControls(camera, document.body);
   scene.add(controls.getObject());
@@ -249,6 +282,13 @@ async function init() {
     if (o.isMesh) {
       // o.material = mats[Math.floor(Math.random() * mats.length)];
       o.material = testMat;
+      // const edges = new THREE.EdgesGeometry(o.geometry); // or WireframeGeometry
+      // const mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+      // const lines = new THREE.LineSegments(edges, mat);
+      // lines.position.x = o.position.x;
+      // lines.position.y = o.position.y;
+      // lines.position.z = o.position.z;
+      // scene.add(lines);
 
       // you can play around with each floorplan's position/rotation below
       // o.order = o.position.y / 9;
@@ -266,81 +306,26 @@ async function init() {
   scene.add(towerMesh);
 
   {
-    const vertexShader = `
-      varying vec3 vWorldPosition;
-
-			void main() {
-
-				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
-				vWorldPosition = worldPosition.xyz;
-
-				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-			}
-    `;
-
-    const fragmentShader = `
-      uniform vec3 topColor;
-			uniform vec3 bottomColor;
-			uniform float offset;
-			uniform float exponent;
-
-			varying vec3 vWorldPosition;
-
-			void main() {
-
-				float h = normalize( vWorldPosition + offset ).y;
-				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( h, exponent ), 0.0 ) ), 1.0 );
-
-			}
-    `;
-
-    const uniforms = {
-      topColor: { type: "c", value: new THREE.Color(0x0000ff) },
-      bottomColor: { type: "c", value: new THREE.Color(0x00ff00) },
-      offset: { type: "f", value: 100 },
-      exponent: { type: "f", value: 0.7 },
-    };
-
-    //skydome
-
-    const skyGeo = new THREE.SphereGeometry(1000, 25, 25);
-    const skyMat = new THREE.ShaderMaterial({
-      vertexShader: vertexShader,
-      fragmentShader: fragmentShader,
-      uniforms: uniforms,
-      side: THREE.BackSide,
-    });
-
-    const sky = new THREE.Mesh(skyGeo, skyMat);
-    // scene.add(sky);
-  }
-
-  {
     //images for faces
-    const skyDome = [
-      "images/t1_seamless.jpg",
-      "images/t1_seamless.jpg",
-      "images/t1_seamless.jpg",
-      "images/t1_seamless.jpg",
-      "images/t1_seamless.jpg",
-      "images/t1_seamless.jpg",
-      // "images/px.jpg",
-      // "images/nx.jpg",
-      // "images/py.jpg",
-      // "images/ny.jpg",
-      // "images/pz.jpg",
-      // "images/nz.jpg",
-    ];
-
+    // const skyDome = [
+    //   "images/t1_seamless.jpg",
+    //   "images/t1_seamless.jpg",
+    //   "images/t1_seamless.jpg",
+    //   "images/t1_seamless.jpg",
+    //   "images/t1_seamless.jpg",
+    //   "images/t1_seamless.jpg",
+    // "images/px.jpg",
+    // "images/nx.jpg",
+    // "images/py.jpg",
+    // "images/ny.jpg",
+    // "images/pz.jpg",
+    // "images/nz.jpg",
+    // ];
     // Add Skybox
-    const cubeTextureloader = new THREE.CubeTextureLoader();
-    const texture = cubeTextureloader.load(skyDome);
+    // const cubeTextureloader = new THREE.CubeTextureLoader();
+    // const texture = cubeTextureloader.load(skyDome);
     // scene.background = texture;
   }
-
-  renderer.setPixelRatio(window.devicePixelRatio);
-  container.appendChild(renderer.domElement);
 
   player = new Player();
 
@@ -362,6 +347,37 @@ async function init() {
     }
 
     const gui = new dat.GUI();
+
+    const ssaoFolder = gui.addFolder("SSAO");
+    ssaoFolder
+      .add(ssaoPass, "output", {
+        Default: THREE.SSAOPass.OUTPUT.Default,
+        "SSAO Only": THREE.SSAOPass.OUTPUT.SSAO,
+        "SSAO Only + Blur": THREE.SSAOPass.OUTPUT.Blur,
+        Beauty: THREE.SSAOPass.OUTPUT.Beauty,
+        Depth: THREE.SSAOPass.OUTPUT.Depth,
+        Normal: THREE.SSAOPass.OUTPUT.Normal,
+      })
+      .onChange(function(value) {
+        ssaoPass.output = parseInt(value);
+      });
+    ssaoFolder
+      .add(ssaoPass, "kernelRadius")
+      .min(0)
+      .max(32);
+    ssaoFolder
+      .add(ssaoPass, "minDistance")
+      .min(0.001)
+      .max(0.02);
+    ssaoFolder
+      .add(ssaoPass, "maxDistance")
+      .min(0.01)
+      .max(0.3);
+
+    // const outlineFolder = gui.addFolder("outline");
+    // outlineFolder.add(outlinePass, "edgeThickness", 1, 4);
+    // outlineFolder.add(outlinePass, "edgeStrength", 0.01, 10);
+    // addGuiColor(outlineFolder, outlinePass, "visibleEdgeColor");
 
     const ambFolder = gui.addFolder("Ambient Light");
     ambFolder.add(ambientLight, "intensity", 0, 10);
@@ -428,14 +444,16 @@ function animate() {
   player.update();
 
   // toggle these to remove the outline effect
-  // renderer.render(scene, camera);
-  effect.render(scene, camera);
+  renderer.render(scene, camera);
+  // effect.render(scene, camera);
+  // composer.render();
 }
 
 function onWindowResize() {
   camera.aspect = container.clientWidth / container.clientHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(container.clientWidth, container.clientHeight);
+  composer.setSize(container.clientWidth, container.clientHeight);
 }
 
 window.addEventListener("resize", onWindowResize);
