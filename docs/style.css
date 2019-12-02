@@ -67,18 +67,17 @@ h3 {
 }
 
 p.slide {
-  margin:0px;
-
-
+  margin: 0px;
+  margin-bottom: 5px;
 }
+
 p.slide-2 {
-  margin-top:0px;
-
-
+  margin-top: 0px;
 }
+
 p.total {
-
 }
+
 #image-app-container {
   /* height: 600px; */
   display: flex;
@@ -86,6 +85,11 @@ p.total {
 }
 
 #image-app {
+  width: 100%;
+}
+
+.calc-table {
+  border-left: 10px solid #eee;
   width: 100%;
 }
 
@@ -341,9 +345,8 @@ section {
   font-size: 24px;
   color: #000;
   background-color: rgba(238, 238, 238);
-  padding-top:5px;
-  padding-bottom:5px;
-
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .calculate {
@@ -352,7 +355,21 @@ section {
   /* box-shadow: 0px 0px 5px red; */
   outline: 0.5px solid black;
   margin: 30px 0px;
+}
+.calc-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.calculator-input {
+  flex: 1;
+  min-width: 50%;
+}
+
+.calc-bold {
+  /* font-weight: bold; */
+  font-size: 1.2em;
+  margin-bottom: 15px;
 }
 
 input[type="number"] {

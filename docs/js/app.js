@@ -242,7 +242,7 @@ Vue.component("animated-integer", {
           {
             tweeningValue: endValue,
           },
-          500
+          1000
         )
         .onUpdate(function() {
           vm.tweeningValue = this.tweeningValue.toFixed(0);
