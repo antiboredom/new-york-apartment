@@ -22,7 +22,45 @@ function loadGLTF(url) {
   });
 }
 
-const walkingSpeed = 1000;
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+const defaults = {
+  fov: 35,
+  dist: 1000,
+  bg: 0xeeffff,
+  speed: 1000,
+}
+
+const scenes = {
+  flat: {
+    model: 'flat_4000.glb',
+    start: [48.23045010769473, 75.22063006996052, -34.27884385033894],
+    look: [300, -2, -300],
+  },
+  tower: {
+    model: 'tower.glb',
+    start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
+    look: [0, 0, 0],
+    // bg: 0xffeeff,
+    dist: 5000,
+  },
+  fattower: {
+    model: 'fattower.glb',
+    start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
+    look: [0, 0, 0],
+    dist: 1000,
+    // bg: 0xffffee,
+  },
+}
+
+let currentScene = scenes[getUrlParameter('scene')] || scenes.flat;
+
+const walkingSpeed = currentScene.speed || defaults.speed;
 
 class Player {
   constructor() {
@@ -62,10 +100,11 @@ class Player {
   }
 
   setListeners() {
-    container.addEventListener(
+    document.body.addEventListener(
       "click",
       function() {
         controls.lock();
+        document.querySelector("#clicktolock").style.display = "none";
       },
       false
     );
@@ -139,12 +178,12 @@ async function init() {
   player = new Player();
   scene = new THREE.Scene();
 
-  const dist = 3000;
-  // const bg = 0xeeffff;
-  const bg = 0x555555;
-  const fov = 25;
+  const dist = currentScene.dist || defaults.dist;
+  const bg = currentScene.bg || defaults.bg;
+  // const bg = 0x555555;
+  const fov = currentScene.fov || defaults.fov
   const aspect = container.clientWidth / container.clientHeight;
-  const near = 1;
+  const near = 0.3;
   const far = dist;
 
   scene.background = new THREE.Color(bg);
@@ -152,19 +191,11 @@ async function init() {
 
   camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   scene.add(camera);
-  camera.position.set(0, 0, 0);
-
   const ambientLight = new THREE.HemisphereLight(
-    0x000000, // sky color
     0xffffff, // ground color
-    // 0xddeeff, // sky color
-    // 0x202020, // ground color
-    4.5 // intensity
+    0x000000, // sky color
+    2.4 // intensity
   );
-
-  // const mainLight = new THREE.DirectionalLight(0xffffff, 2);
-  // mainLight.castShadow = true;
-  // mainLight.position.set(10, 10, 10);
 
   scene.add(ambientLight);
 
@@ -176,44 +207,11 @@ async function init() {
   directionalLight.position.set(0.5, 1, 0.5);
   scene.add(directionalLight2);
 
-  const spotLight = new THREE.SpotLight(0xffffff, 1);
-  spotLight.position.set(15, 40, 35);
-  spotLight.angle = Math.PI / 4;
-  spotLight.penumbra = 0.05;
-  spotLight.decay = 2;
-  spotLight.distance = 200;
-  scene.add(spotLight);
-
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
+
   container.appendChild(renderer.domElement);
-
-  // this removes the background alltogether...
-  // renderer.setClearColor(0x000000, 0);
-
-  composer = new THREE.EffectComposer(renderer);
-
-  // const renderPass = new THREE.RenderPass(scene, camera);
-  // composer.addPass(renderPass);
-
-  const ssaoPass = new THREE.SSAOPass(
-    scene,
-    camera,
-    container.clientWidth,
-    container.clientHeight
-  );
-  ssaoPass.kernelRadius = 16;
-  // composer.addPass(ssaoPass);
-
-  // const bokehPass = new THREE.BokehPass(scene, camera, {
-  //   focus: 0.1,
-  //   aperture: 0.25,
-  //   maxblur: 0.01,
-  //   width: container.clientWidth,
-  //   height: container.clientHeight,
-  // });
-  // composer.addPass(bokehPass);
 
   // the outline effect
   effect = new THREE.OutlineEffect(renderer, {
@@ -223,37 +221,21 @@ async function init() {
     defaultKeepAlive: true,
   });
 
-  // const outlinePass = new THREE.OutlinePass( new THREE.Vector2( container.clientWidth, container.clientHeight ), scene, camera );
-  // outlinePass.edgeStrength = 3.0;
-  // outlinePass.edgeThickness = 1.0;
-  // outlinePass.visibleEdgeColor = 0xFF0000;
-  // composer.addPass( outlinePass );
-
   controls = new THREE.PointerLockControls(camera, document.body);
   scene.add(controls.getObject());
+  camera.position.set(currentScene.start[0], currentScene.start[1], currentScene.start[2]);
+  camera.lookAt(new THREE.Vector3(currentScene.look[0], currentScene.look[1], currentScene.look[2]));
 
   try {
-    // different models to load
-    // let glb = await loadGLTF("all_grid2.glb");
-    let glb = await loadGLTF("all_grid_packed.glb");
-    // let glb = await loadGLTF("flat_4000.glb");
-    // let glb = await loadGLTF("all6.glb");
-    // let glb = await loadGLTF("all5.glb");
+    let glb = await loadGLTF(currentScene.model);
     towerMesh = glb.scene;
   } catch (e) {
     console.log(e);
   }
 
-  // an array of possible materials to use
   const mats = [
-    // new THREE.MeshToonMaterial({ color: 0x555555 }),
-    // new THREE.MeshToonMaterial({ color: 0x444444 }),
-    // new THREE.MeshToonMaterial({ color: 0x333333 }),
-    // new THREE.MeshPhongMaterial({ color: 0x444444, shininess: 40, emissive: 0x383838, emissiveIntensity: 1, specular: 0xff0000}),
-    // new THREE.MeshPhongMaterial({ color: 0x2194ce, shininess: 40, emissive: 0x383838, emissiveIntensity: 1, specular: 0xff0000}),
-    // new THREE.MeshPhongMaterial({ color: 0x2194ce, shininess: 40, emissive: 0x383838, emissiveIntensity: 1, specular: 0xff0000}),
     new THREE.MeshStandardMaterial({
-      color: 0x999999,
+      color: 0xbababa,
       flatShading: false,
       roughness: 0.3,
       metalness: 0.5,
@@ -270,19 +252,25 @@ async function init() {
       roughness: 0.3,
       metalness: 0.5,
     }),
+    new THREE.MeshStandardMaterial({
+      color: 0xdbdbdb,
+      flatShading: false,
+      roughness: 0.3,
+      metalness: 0.5,
+    }),
+    new THREE.MeshStandardMaterial({
+      color: 0xdddddd,
+      flatShading: false,
+      roughness: 0.3,
+      metalness: 0.5,
+    }),
   ];
-
-  const testMat = new THREE.MeshStandardMaterial({
-    color: 0x878787,
-    roughness: 0.5,
-    metalness: 0.5,
-    emissive: 0x000000,
-  });
 
   towerMesh.traverse(o => {
     if (o.isMesh) {
       o.material = mats[Math.floor(Math.random() * mats.length)];
-      // o.material = testMat;
+      o.material.receiveShadow = true;
+      o.material.castShadow = true;
       // const edges = new THREE.EdgesGeometry(o.geometry); // or WireframeGeometry
       // const mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
       // const lines = new THREE.LineSegments(edges, mat);
@@ -292,8 +280,8 @@ async function init() {
       // scene.add(lines);
 
       // you can play around with each floorplan's position/rotation below
-      // o.order = o.position.y / 9;
-      // o.rspeed = o.position.x * 0.0001;
+      o.order = o.position.y / 9;
+      o.rspeed = o.position.x * 0.000001;
       // o.position.set(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
       // o.rotation.set(0, o.position.y * 0.01, 0);
       // o.position.x = Math.sin(o.position.y) * 10;
@@ -306,31 +294,7 @@ async function init() {
 
   scene.add(towerMesh);
 
-  {
-    //images for faces
-    // const skyDome = [
-    //   "images/t1_seamless.jpg",
-    //   "images/t1_seamless.jpg",
-    //   "images/t1_seamless.jpg",
-    //   "images/t1_seamless.jpg",
-    //   "images/t1_seamless.jpg",
-    //   "images/t1_seamless.jpg",
-    // "images/px.jpg",
-    // "images/nx.jpg",
-    // "images/py.jpg",
-    // "images/ny.jpg",
-    // "images/pz.jpg",
-    // "images/nz.jpg",
-    // ];
-    // Add Skybox
-    // const cubeTextureloader = new THREE.CubeTextureLoader();
-    // const texture = cubeTextureloader.load(skyDome);
-    // scene.background = texture;
-  }
-
-  player = new Player();
-
-  {
+  function makeGUI() {
     function addGuiColor(gui, obj, prop) {
       const data = {};
       data[prop] = obj[prop].getHex();
@@ -348,37 +312,6 @@ async function init() {
     }
 
     const gui = new dat.GUI();
-
-    const ssaoFolder = gui.addFolder("SSAO");
-    ssaoFolder
-      .add(ssaoPass, "output", {
-        Default: THREE.SSAOPass.OUTPUT.Default,
-        "SSAO Only": THREE.SSAOPass.OUTPUT.SSAO,
-        "SSAO Only + Blur": THREE.SSAOPass.OUTPUT.Blur,
-        Beauty: THREE.SSAOPass.OUTPUT.Beauty,
-        Depth: THREE.SSAOPass.OUTPUT.Depth,
-        Normal: THREE.SSAOPass.OUTPUT.Normal,
-      })
-      .onChange(function(value) {
-        ssaoPass.output = parseInt(value);
-      });
-    ssaoFolder
-      .add(ssaoPass, "kernelRadius")
-      .min(0)
-      .max(32);
-    ssaoFolder
-      .add(ssaoPass, "minDistance")
-      .min(0.001)
-      .max(0.02);
-    ssaoFolder
-      .add(ssaoPass, "maxDistance")
-      .min(0.01)
-      .max(0.3);
-
-    // const outlineFolder = gui.addFolder("outline");
-    // outlineFolder.add(outlinePass, "edgeThickness", 1, 4);
-    // outlineFolder.add(outlinePass, "edgeStrength", 0.01, 10);
-    // addGuiColor(outlineFolder, outlinePass, "visibleEdgeColor");
 
     const ambFolder = gui.addFolder("Ambient Light");
     ambFolder.add(ambientLight, "intensity", 0, 10);
@@ -402,28 +335,12 @@ async function init() {
     dirFolder2.add(directionalLight2.position, "z", -10, 10);
     dirFolder2.open();
 
-    const spotFolder = gui.addFolder("Spot Light");
-    addGuiColor(spotFolder, spotLight, "color");
-    spotFolder.add(spotLight, "intensity", 0, 2);
-    spotFolder.add(spotLight, "distance", 0, 1000);
-    spotFolder.add(spotLight, "angle", 0, 2);
-    spotFolder.add(spotLight, "penumbra", 0, 1);
-    spotFolder.add(spotLight, "decay", 1, 2);
-    spotFolder.add(spotLight.position, "x", -1000, 1000);
-    spotFolder.add(spotLight.position, "y", -1000, 1000);
-    spotFolder.add(spotLight.position, "z", -1000, 1000);
-    spotFolder.open();
-
     const matFolder = gui.addFolder("Material");
     matFolder.add(testMat, "roughness", 0, 1);
     matFolder.add(testMat, "metalness", 0, 1);
     addGuiColor(matFolder, testMat, "color");
     addGuiColor(matFolder, testMat, "emissive");
     matFolder.open();
-
-    // const outlineFolder = gui.addFolder("Outline");
-    // outlineFolder.add(effect, "edgeThickness", 0, 5);
-    // outlineFolder.open();
   }
 }
 
@@ -431,23 +348,22 @@ function animate() {
   requestAnimationFrame(animate);
 
   // if you want to animate each floorplan...
-  // if (towerMesh) {
-  //   towerMesh.traverse(o => {
-  //     if (o.isMesh) {
-  //       o.rotation.y += o.rspeed;
-  //       o.rotation.y += o.rspeed/2;
-  //       o.position.x = Math.sin(delta/2 + o.order)*115;
-  //       o.position.z = Math.cos(delta/2 + o.order)*115;
-  //     }
-  //   });
-  // }
+  if (towerMesh) {
+    towerMesh.traverse(o => {
+      if (o.isMesh) {
+        // o.rotation.y += o.rspeed;
+        // o.rotation.y += o.rspeed/2;
+        // o.position.x = Math.sin(delta/2 + o.order)*115;
+        // o.position.z = Math.cos(delta/2 + o.order)*115;
+      }
+    });
+  }
 
   player.update();
 
   // toggle these to remove the outline effect
   // renderer.render(scene, camera);
   effect.render(scene, camera);
-  // composer.render();
 }
 
 function onWindowResize() {
