@@ -164,8 +164,15 @@ section {
   margin: 0px 10px;
 }
 
+.open-tour {
+  display: block;
+  margin-bottom: 20px;
+}
+
 #meta-container {
-  min-width: 25vw;
+  /* min-width: 25vw; */
+  min-width: 360px;
+  width: 360px;
 }
 
 #image-app-container {

@@ -328,14 +328,20 @@ const CalculatorApp = new Vue({
 
 const modal = document.querySelector("#modal");
 const closeModal = document.querySelector("#close-modal");
-const openModalButton = document.querySelector("#open-tour");
+const openModalButtons = document.querySelectorAll(".open-tour");
 const frame = document.querySelector("iframe");
 
-openModalButton.addEventListener("click", function(e) {
-  e.preventDefault();
-  frame.src = "tour/";
-  modal.style.display = "flex";
-});
+function addTourListener(b) {
+  b.addEventListener("click", function(e) {
+    e.preventDefault();
+    frame.src = "tour/?scene=" + b.dataset.scene;
+    modal.style.display = "flex";
+  });
+}
+
+for (let b of openModalButtons) {
+  addTourListener(b);
+}
 
 closeModal.addEventListener("click", function(e) {
   e.preventDefault();
