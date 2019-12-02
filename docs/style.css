@@ -420,6 +420,16 @@ input[type="number"] {
     width: 85vw !important;
     min-width: 85vw !important;
     max-width: 85vw !important;
+    padding: 5px;
+    margin: 0px 5px;
+  }
+
+  #logo {
+    font-size: 40px;
+  }
+
+  #total-price {
+    font-size: 30px;
   }
 
   #features-container {
