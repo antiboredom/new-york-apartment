@@ -16,6 +16,39 @@ let dracoLoader = new THREE.DRACOLoader();
 dracoLoader.setDecoderPath("draco/");
 loader.setDRACOLoader(dracoLoader);
 
+const defaults = {
+  fov: 35,
+  dist: 1000,
+  bg: 0xeeffff,
+  speed: 1000,
+};
+
+const scenes = {
+  flat: {
+    model: "flat_4000.glb",
+    start: [48.23045010769473, 75.22063006996052, -34.27884385033894],
+    look: [300, -2, -300],
+  },
+  tower: {
+    model: "tower.glb",
+    start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
+    look: [0, 0, 0],
+    // bg: 0xffeeff,
+    dist: 5000,
+  },
+  fattower: {
+    model: "fattower.glb",
+    start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
+    look: [0, 0, 0],
+    dist: 1000,
+    // bg: 0xffffee,
+  },
+};
+
+let currentScene = scenes[getUrlParameter("scene")] || scenes.flat;
+
+const walkingSpeed = currentScene.speed || defaults.speed;
+
 function loadGLTF(url) {
   return new Promise(resolve => {
     loader.load(url, resolve);
@@ -23,44 +56,25 @@ function loadGLTF(url) {
 }
 
 function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-};
-
-const defaults = {
-  fov: 35,
-  dist: 1000,
-  bg: 0xeeffff,
-  speed: 1000,
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+  var results = regex.exec(location.search);
+  return results === null
+    ? ""
+    : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-const scenes = {
-  flat: {
-    model: 'flat_4000.glb',
-    start: [48.23045010769473, 75.22063006996052, -34.27884385033894],
-    look: [300, -2, -300],
-  },
-  tower: {
-    model: 'tower.glb',
-    start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
-    look: [0, 0, 0],
-    // bg: 0xffeeff,
-    dist: 5000,
-  },
-  fattower: {
-    model: 'fattower.glb',
-    start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
-    look: [0, 0, 0],
-    dist: 1000,
-    // bg: 0xffffee,
-  },
+function addClickLock() {
+  document.body.addEventListener(
+    "click",
+    function() {
+      controls.lock();
+      document.querySelector("#clicktolock").style.display = "none";
+    },
+    false
+  );
+  document.querySelector("#clicktolock").textContent = "Click to start.";
 }
-
-let currentScene = scenes[getUrlParameter('scene')] || scenes.flat;
-
-const walkingSpeed = currentScene.speed || defaults.speed;
 
 class Player {
   constructor() {
@@ -100,15 +114,6 @@ class Player {
   }
 
   setListeners() {
-    document.body.addEventListener(
-      "click",
-      function() {
-        controls.lock();
-        document.querySelector("#clicktolock").style.display = "none";
-      },
-      false
-    );
-
     document.addEventListener(
       "keydown",
       event => {
@@ -181,7 +186,7 @@ async function init() {
   const dist = currentScene.dist || defaults.dist;
   const bg = currentScene.bg || defaults.bg;
   // const bg = 0x555555;
-  const fov = currentScene.fov || defaults.fov
+  const fov = currentScene.fov || defaults.fov;
   const aspect = container.clientWidth / container.clientHeight;
   const near = 0.3;
   const far = dist;
@@ -223,11 +228,22 @@ async function init() {
 
   controls = new THREE.PointerLockControls(camera, document.body);
   scene.add(controls.getObject());
-  camera.position.set(currentScene.start[0], currentScene.start[1], currentScene.start[2]);
-  camera.lookAt(new THREE.Vector3(currentScene.look[0], currentScene.look[1], currentScene.look[2]));
+  camera.position.set(
+    currentScene.start[0],
+    currentScene.start[1],
+    currentScene.start[2]
+  );
+  camera.lookAt(
+    new THREE.Vector3(
+      currentScene.look[0],
+      currentScene.look[1],
+      currentScene.look[2]
+    )
+  );
 
   try {
     let glb = await loadGLTF(currentScene.model);
+    addClickLock();
     towerMesh = glb.scene;
   } catch (e) {
     console.log(e);
