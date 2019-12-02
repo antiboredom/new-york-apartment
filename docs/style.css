@@ -152,7 +152,9 @@ section {
 }
 
 #meta-container {
-  min-width: 25vw;
+  /* min-width: 25vw; */
+  min-width: 360px;
+  width: 360px;
 }
 
 #image-app-container {
