@@ -139,7 +139,7 @@ async function init() {
   player = new Player();
   scene = new THREE.Scene();
 
-  const dist = 2000;
+  const dist = 3000;
   // const bg = 0xeeffff;
   const bg = 0x555555;
   const fov = 25;
@@ -217,9 +217,9 @@ async function init() {
 
   // the outline effect
   effect = new THREE.OutlineEffect(renderer, {
-    defaultThickness: 0.004,
+    defaultThickness: 0.002,
     defaultColor: [0, 0, 0],
-    defaultAlpha: 0.9,
+    defaultAlpha: 0.5,
     defaultKeepAlive: true,
   });
 
@@ -236,6 +236,7 @@ async function init() {
     // different models to load
     // let glb = await loadGLTF("all_grid2.glb");
     let glb = await loadGLTF("all_grid_packed.glb");
+    // let glb = await loadGLTF("flat_4000.glb");
     // let glb = await loadGLTF("all6.glb");
     // let glb = await loadGLTF("all5.glb");
     towerMesh = glb.scene;
@@ -280,8 +281,8 @@ async function init() {
 
   towerMesh.traverse(o => {
     if (o.isMesh) {
-      // o.material = mats[Math.floor(Math.random() * mats.length)];
-      o.material = testMat;
+      o.material = mats[Math.floor(Math.random() * mats.length)];
+      // o.material = testMat;
       // const edges = new THREE.EdgesGeometry(o.geometry); // or WireframeGeometry
       // const mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
       // const lines = new THREE.LineSegments(edges, mat);
@@ -444,8 +445,8 @@ function animate() {
   player.update();
 
   // toggle these to remove the outline effect
-  renderer.render(scene, camera);
-  // effect.render(scene, camera);
+  // renderer.render(scene, camera);
+  effect.render(scene, camera);
   // composer.render();
 }
 
