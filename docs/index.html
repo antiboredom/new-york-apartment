@@ -5309,29 +5309,6 @@
           <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659767?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Pre-war</p></div>
           <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659749?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Marble</p></div>
           <script src="https://player.vimeo.com/api/player.js"></script>
-          <!-- <video class="autovid" controls src="videos/the_apartment.mp4"></video> -->
-          <!-- <video class="autovid" controls src="videos/living_room.mp4"></video> -->
-          <!-- <video class="autovid" controls src="videos/dining_room.mp4"></video> -->
-          <!-- <video class="autovid" controls src="videos/master_bedroom.mp4"></video> -->
-          <!-- <video class="autovid" controls src="videos/bathroom.mp4"></video> -->
-          <!-- <video class="autovid" controls src="videos/stainless_steel.mp4"></video> -->
-          <script>
-            {
-              function addListener(v) {
-                v.addEventListener('mouseover', () => {
-                  // v.muted = false;
-                  // v.play();
-                });
-                // v.addEventListener('mouseout') {
-                  // v.muted = false;
-                // }
-              }
-              const vids = document.querySelectorAll('.autovid');
-              for (let v of vids) {
-                addListener(v);
-              }
-            }
-          </script>
         </div>
       </section>
 
@@ -13888,8 +13865,8 @@
               <div class="calculator-input">
                 <p class="slide calc-bold">Interest rate</p>
                 <p class="slide-2">
-                  <input type="number" v-model="r" size="2" @change="calculate"> %
-                  <input type="range" min="0" max="100" step="1" v-model="r" class="" size="4" @change="calculate">
+                  <input type="number" min="0" step="0.1" v-model="r" size="2" @change="calculate"> %
+                  <input type="range" min="0" max="100" step="0.1" v-model="r" class="" size="4" @change="calculate">
                 </p>
               </div>
 
@@ -13918,7 +13895,7 @@
               </div>
             </div>
 
-            <button v-on:click="calculate" class="calculate">Calculate</button>
+            <p style="text-align: center"><button v-on:click="calculate" class="calculate">Calculate</button></p>
 
             <p class="total">
               Estimated Monthly Payment: $<span v-if="monthly>0"> <animated-integer :value="monthly" /></span><span v-else>???</span>
@@ -13930,8 +13907,9 @@
               <table class="calc-table">
                 <tr><td style="width: 50%">Property tax:</td><td>$<animated-integer :value="tax" /></td></tr>
                 <tr><td>HOA:</td><td>$<animated-integer :value="hoa" /></td></tr>
-                <tr><td>Interest and principle:</td><td>$<animated-integer :value="interestPrinciple" /></td>
-                <tr><td>Total Monthly Payment:</td><td>$<animated-integer :value="monthly" /></td>
+                <tr><td>Interest and principle:</td><td>$<animated-integer :value="interestPrinciple" /></td></tr>
+                <tr><td>Total Monthly Payment:</td><td>$<animated-integer :value="monthly" /></td></tr>
+                <tr><td>Percent of Monthly Salary:</td><td><animated-integer :value="percentOfSalary" />%</td></tr>
               </table>
 
               <p class="total">Estimated amortization calculations: </p>
@@ -13939,19 +13917,15 @@
                 <tr><td style="width:60%">Deposit:</td><td> $<animated-integer :value="dep" /> </td></tr>
                 <tr><td>Total Principal Paid:</td><td> $<animated-integer :value="mortgage" /> </td></tr>
                 <tr><td>Total Interest Paid:</td><td> $<animated-integer :value="totalInterest" /> </td></tr>
-                <tr><td>Mortgage payoff date:</td><td> {{end}}</td></tr>
-                <tr><td>Estimated atmospheric CO2 at payoff date:</td><td> {{carbon}} ppm</td></tr>
+                <tr><td>Mortgage payoff date:</td><td><animated-integer :value="end" :formatting="false" /></td></tr>
+                <tr><td>Estimated atmospheric CO2 at payoff date:</td><td><animated-integer :value="carbon" :formatting="false" /> ppm</td></tr>
               </table>
-
             </div>
             <!-- <p>Estimated temperature change at payoff: {{carbon}} ppm</p> -->
             <!-- <p>Estimated sea level rise at payoff: {{carbon}} ppm</p> -->
-
-          
-
-
           </div>
         </div>
+        <br><br>
       </section>
 
       <!-- <section> -->

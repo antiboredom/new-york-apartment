@@ -190,7 +190,7 @@ const ContactApp = new Vue({
       });
 
       location.href = urls[this.index];
-      this.index ++;
+      this.index++;
 
       if (this.index >= urls.length) {
         this.reset();
@@ -223,11 +223,19 @@ Vue.component("animated-integer", {
       type: Number,
       required: true,
     },
+    formatting: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   data: function() {
     return {
       tweeningValue: 0,
     };
+  },
+  created() {
+    this.time = Math.floor(Math.random() * 600) + 1000;
   },
   watch: {
     value: function(newValue, oldValue) {
@@ -239,6 +247,8 @@ Vue.component("animated-integer", {
   },
   computed: {
     formattedValue() {
+      if (!this.formatting) return this.tweeningValue;
+
       return this.tweeningValue
         .toString()
         .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -260,7 +270,7 @@ Vue.component("animated-integer", {
           {
             tweeningValue: endValue,
           },
-          1000
+          vm.time
         )
         .onUpdate(function() {
           vm.tweeningValue = this.tweeningValue.toFixed(0);
@@ -292,41 +302,52 @@ const CalculatorApp = new Vue({
     carbon: null,
     insects: 100,
     totalInterest: 0,
+    percentOfSalary: 0,
   },
 
   methods: {
     calculate() {
       this.resetData();
-      this.dep = this.price * (this.down / 100);
-      this.mortgage = this.price - this.dep;
-      this.payment = ((this.salary * 0.67) / 12) * 0.3;
-      //(-log(1- i * A / P)) / log (1 + i)
-      //this.repayments = -1 * (Math.log(1 - this.r * this.mortgage / this.payment)/Math.log(1 + this.r))
-      const monthlyRate = Number(this.r) / 12;
-      const totalPayments = Number(this.n) * Number(this.y);
 
-      console.log(monthlyRate, totalPayments, this.y);
+      this.$nextTick(() => {
+        this.dep = this.price * (this.down / 100);
+        this.mortgage = this.price - this.dep;
+        this.payment = ((this.salary * 0.67) / 12) * 0.3;
 
-      this.interestPrinciple =
-        this.mortgage *
-        ((monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) /
-          (Math.pow(1 + monthlyRate, totalPayments) - 1));
+        const totalPayments = Number(this.n) * Number(this.y);
+        const rate = Number(this.r) / 100 / 12;
 
-      this.tax = this.price * 0.0014;
-      this.hoa = 32287410;
+        this.interestPrinciple =
+          (rate * this.mortgage * Math.pow(1 + rate, totalPayments)) /
+          (Math.pow(1 + rate, totalPayments) - 1);
 
-      this.monthly = this.sum(this.tax, this.hoa, this.interestPrinciple);
-      this.totalInterest = this.monthly * totalPayments - this.mortgage;
-      this.end = new Date().getFullYear() + Number(this.y);
-      this.carbon = 408.53 + this.y * 2.5;
-      this.insects = 100 * (1 - Math.pow(0.975, this.y));
+        if (rate == 0) {
+          this.interestPrinciple = this.mortgage / totalPayments;
+        }
+
+        this.tax = this.price * 0.0014;
+        this.hoa = 32287410;
+
+        this.monthly = this.sum(this.tax, this.hoa, this.interestPrinciple);
+        this.totalInterest = this.monthly * totalPayments - this.mortgage;
+        this.end = new Date().getFullYear() + Number(this.y);
+        this.carbon = 408.53 + this.y * 2.5;
+        this.insects = 100 * (1 - Math.pow(0.975, this.y));
+        this.percentOfSalary = (this.monthly / (this.salary / 12)) * 100;
+      });
     },
 
     resetData() {
-      this.monthly = null;
-      this.dep = null;
-      this.tax = null;
-      this.hoa = null;
+      this.monthly = 0;
+      this.dep = 0;
+      this.tax = 0;
+      this.hoa = 0;
+      this.percentOfSalary = 0;
+      this.interestPrinciple = 0;
+      this.totalInterest = 0;
+      this.mortgage = 0;
+      this.end = 0;
+      this.carbon = 0;
     },
 
     sum(tax, hoa, interest) {
@@ -339,8 +360,8 @@ const CalculatorApp = new Vue({
       return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     },
     trackChange() {
-      this.price = parseInt(this.price) === 0  ? null : this.price
-    }
+      this.price = parseInt(this.price) === 0 ? null : this.price;
+    },
   },
 });
 
