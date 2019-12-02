@@ -414,3 +414,34 @@ input[type="number"] {
   background: #ff6437; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
+
+@media (max-width: 768px) {
+  section {
+    width: 85vw !important;
+    min-width: 85vw !important;
+    max-width: 85vw !important;
+  }
+
+  #features-container {
+    /* width: 50vw; */
+    /* min-width: 50vw; */
+    /* max-width: 50vw; */
+  }
+
+  #features-list {
+    font-size: 14px;
+    column-count: 1;
+  }
+
+  .vid-holder {
+    width: 100%;
+    padding: 0px;
+    float: none;
+    margin-bottom: 10px;
+  }
+
+  .image-app {
+    height: 250px;
+    margin-bottom: 20px;
+  }
+}
