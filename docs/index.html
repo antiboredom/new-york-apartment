@@ -13879,31 +13879,35 @@
         <div class="inner-section">
           <h3>Mortgage calculator</h3>
           <div id="calculator-app" class="has-bg">
+            <p class="total">Apartment Price | ${{price}} </p>
             <p>Learn about how you can manage your repayments on the New York Apartment.</p>
-            <p class="total">Total cost: $ <input type="text" id="total" v-model="price" size="15" disabled></p>
-            <p>Interest rate: <input type="number" v-model="r" size="2" @change="calculate"> %
-              <input type="range" min="0" max="100" step="1" v-model="r" class="" size="4" @change="calculate"></p>
-            <p>Loan term: <input type="number" v-model="y" @change="calculate"> years 
+            
+            <p class="slide">Interest rate:</p><p class="slide-2"> <input type="number" v-model="r" size="2" @change="calculate">%<input type="range" min="0" max="100" step="1" v-model="r" class="" size="4" @change="calculate"> </p>
+            <p class="slide">Loan term: </p><p class="slide-2"> <input type="number" v-model="y" @change="calculate"> years 
               <input type="range" min="1" max="1000" step="1" v-model="y" class="" size="4" @change="calculate"></p>
-            <p>Down payment: <input type="number" v-model="down" size="4" @change="calculate"> %
+            <p class="slide">Down payment: </p><p class="slide-2"> <input type="number" v-model="down" size="4" @change="calculate"> %
               <input type="range" min="1" max="100" step="1" v-model="down" class="" size="4" @change="calculate"></p>
-            <p>Your Salary: $ <input type="number" v-model="salary" size="20" @change="calculate"> 
-            <input type="range" min="1" max="10000000" v-model="salary" class=""  size="4" @change="calculate"></p>
+      
 
             <button v-on:click="calculate" class="calculate">Calculate</button>
 
-            <h4>Estimated Monthly Payment Breakdown</h4>
+            <p class="total">Estimated Monthly Payment | $<div v-if ="monthly>0"> <animated-integer :value="monthly" /></div> </p>
+            <p>How is my monthly payment calculated?</p>
             <p>Property tax: $<animated-integer :value="tax" /></p>
             <p>HOA: $<animated-integer :value="hoa" /></p>
             <p>Interest and principle: $<animated-integer :value="interestPrinciple" /> </p>
             <p>Total Monthly Payment: $<animated-integer :value="monthly" /> </p>
-            <h4>Estimated Totals</h4>
+  
+            <p class="total">Estimated amortization calculations: </p>
             <p>Deposit: $<animated-integer :value="dep" /> </p>
             <p>Total Principal Paid: $<animated-integer :value="mortgage" /> </p>
             <p>Total Interest Paid: $<animated-integer :value="totalInterest" /> </p>
             <p>Mortgage payoff date: {{end}}</p>
-            <p>Estimated CO2 at mortgage payoff date: {{carbon}} ppm</p>
-            <p>Insect population flux compared total yr 2000: <animated-integer :value="insects" />%</p>
+            <p>Estimated atmospheric CO2 at payoff date: {{carbon}} ppm</p>
+            <!-- <p>Estimated temperature change at payoff: {{carbon}} ppm</p> -->
+            <!-- <p>Estimated sea level rise at payoff: {{carbon}} ppm</p> -->
+
+          
 
 
           </div>

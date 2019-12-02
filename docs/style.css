@@ -66,6 +66,19 @@ h3 {
   margin: 0;
 }
 
+p.slide {
+  margin:0px;
+
+
+}
+p.slide-2 {
+  margin-top:0px;
+
+
+}
+p.total {
+
+}
 #image-app-container {
   /* height: 600px; */
   display: flex;
@@ -320,14 +333,19 @@ section {
 #calculator-app .total input {
   font-size: 24px;
   color: #000;
+  background-color: rgba(238, 238, 238);
+  padding-top:5px;
+  padding-bottom:5px;
+
 }
 
 .calculate {
-  font-size: 50px;
-  width: 100%;
+  font-size: 25px;
+  width: 30%;
   /* box-shadow: 0px 0px 5px red; */
-  outline: 1px solid black;
+  outline: 0.5px solid black;
   margin: 30px 0px;
+
 }
 
 input[type="number"] {

@@ -279,7 +279,6 @@ const CalculatorApp = new Vue({
   methods: {
     calculate() {
       this.resetData();
-
       this.dep = this.price * (this.down / 100);
       this.mortgage = this.price - this.dep;
       this.payment = ((this.salary * 0.67) / 12) * 0.3;
@@ -321,6 +320,9 @@ const CalculatorApp = new Vue({
       num = num.toFixed(0);
       return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     },
+    trackChange() {
+      this.price = parseInt(this.price) === 0  ? null : this.price
+    }
   },
 });
 
