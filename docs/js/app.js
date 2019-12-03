@@ -378,7 +378,7 @@ async function setupQuestions() {
     let speed = Math.random() * 20 + 20;
 
     let styles = [
-      `box-shadow: 0px 0px 5px hsl(${h}, ${s}%, ${b}%)`,
+      // `box-shadow: 0px 0px 5px hsl(${h}, ${s}%, ${b}%)`,
       `transform: rotate(${r}deg) translate(${startX}px, ${startY}px)`,
       `transition-duration: ${speed}s`,
     ].join(";");
