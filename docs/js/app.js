@@ -366,6 +366,10 @@ const CalculatorApp = new Vue({
 });
 
 async function setupQuestions() {
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    return false;
+  }
+
   function make() {
     let startX = window.innerWidth + 200;
     let endX = -window.innerWidth;
