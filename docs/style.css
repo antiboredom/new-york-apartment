@@ -78,6 +78,12 @@ p.slide-2 {
 p.total {
 }
 
+#credits {
+  border-top: 1px solid #888;
+  padding-top: 10px;
+  color: #888
+}
+
 #image-app-container {
   /* height: 600px; */
   display: flex;
