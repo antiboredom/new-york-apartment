@@ -116,7 +116,7 @@ const ImageApp = new Vue({
   },
 
   async created() {
-    response = await fetch("data/images.json");
+    let response = await fetch("data/images.json");
     allImages = await response.json();
     this.cats = Object.keys(allImages);
     for (let c of this.cats) {
@@ -177,7 +177,7 @@ const ContactApp = new Vue({
   el: "#contact-app",
   data: { agents: [], index: 0, batchSize: 100 },
   async created() {
-    response = await fetch("data/agents.json");
+    let response = await fetch("data/agents.json");
     this.agents = await response.json();
   },
   methods: {
@@ -364,6 +364,76 @@ const CalculatorApp = new Vue({
     },
   },
 });
+
+async function setupQuestions() {
+  function make() {
+    let startX = window.innerWidth + 200;
+    let endX = -window.innerWidth;
+    let startY = Math.random() * window.innerHeight - 50;
+    let endY = startY;
+    let r = 0;
+    let h = Math.random() * 255;
+    let s = 100;
+    let b = 50;
+    let speed = Math.random() * 20 + 20;
+
+    let styles = [
+      `box-shadow: 0px 0px 5px hsl(${h}, ${s}%, ${b}%)`,
+      `transform: rotate(${r}deg) translate(${startX}px, ${startY}px)`,
+      `transition-duration: ${speed}s`,
+    ].join(";");
+
+    let content = `<span class="question" style="${styles}">${questions[index]}</span>`;
+
+    let el = document.createElement("div");
+    el.innerHTML = content;
+    el = el.firstChild;
+    document.body.append(el);
+
+    let deleted = false;
+    el.addEventListener("transitionend", () => {
+      if (!deleted) {
+        deleted = true;
+        document.body.removeChild(el);
+      }
+    });
+
+    setTimeout(() => {
+      el.style.transform = `rotate(${r}deg) translate(${endX}px, ${endY}px)`;
+    }, 100);
+
+    index++;
+    if (index >= questions.length) {
+      index = 0;
+    }
+  }
+
+  function startEm() {
+    questionInterval = setInterval(make, 4000);
+  }
+
+  let response = await fetch("data/selected_questions.txt");
+  let questions = await response.text();
+  questions = questions.split("\n");
+
+  let index = 0;
+  const timeToStart = 5000;
+
+  let countdownTimeout = setTimeout(startEm, timeToStart);
+  let questionInterval;
+
+  window.addEventListener("mousemove", e => {
+    for (let el of document.querySelectorAll(".question")) {
+      document.body.removeChild(el);
+    }
+
+    clearTimeout(countdownTimeout);
+    clearInterval(questionInterval);
+    countdownTimeout = setTimeout(startEm, timeToStart);
+  });
+}
+
+setupQuestions();
 
 const modal = document.querySelector("#modal");
 const closeModal = document.querySelector("#close-modal");

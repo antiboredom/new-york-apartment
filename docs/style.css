@@ -192,7 +192,6 @@ section {
   padding: 2px;
 }
 
-
 #meta-container {
   /* min-width: 25vw; */
   min-width: 360px;
@@ -317,6 +316,18 @@ section {
 #features-list {
   font-size: 14px;
   column-count: 3;
+}
+
+.question {
+  position: fixed;
+  transition-timing-function: linear;
+  top: 0;
+  left: 0;
+  color: #000;
+  background-color: #fff;
+  padding: 2px;
+  white-space: pre;
+  z-index: 999;
 }
 
 #modal {
