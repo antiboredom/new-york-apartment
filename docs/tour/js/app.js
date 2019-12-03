@@ -73,7 +73,7 @@ function addClickLock() {
     },
     false
   );
-  document.querySelector("#clicktolock").textContent = "Click to start.";
+  document.querySelector("#msg").textContent = "Click to start.";
 }
 
 class Player {
