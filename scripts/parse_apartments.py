@@ -14,9 +14,12 @@ def get_meta(data):
     total = len(data)
 
     for d in data:
-        total_beds += d["beds"]
-        total_baths += d["baths"]
-        total_sqft += d["size"]
+        if d["beds"] < 10:
+            total_beds += d["beds"]
+        if d["baths"] < 10:
+            total_baths += d["baths"]
+        if d["size"] < 10000:
+            total_sqft += d["size"]
         total_price += d["price"]
         total_hoa += d.get("hoa", 0)
 
@@ -31,6 +34,7 @@ def get_meta(data):
     print("avg sqft {:,}".format(int(total_sqft / total)))
     print("avg price {:,}".format(int(total_price / total)))
     print("avg hoa {:,}".format(int(total_hoa / total)))
+    print("prc/ft {:,}".format(total_price/total_sqft))
 
 
 def pos_regex_matches(doc, pattern, search_type="tag"):
@@ -94,15 +98,16 @@ def description_sentences(data):
 
 
 if __name__ == "__main__":
-    DATA = "all_apartments.json"
+    # DATA = "../data/all_apartments.json"
+    DATA = "../../new-york-apartment/all_apartments.json"
     with open(DATA, "r") as infile:
         data = json.load(infile)
 
-    # get_meta(data)
+    get_meta(data)
     # description_sentences(data)
     # get_pattern(data, r'<DT> <NN> <VBZ> <JJ>') # the blank is blank
-    get_pattern(data, r'<VB> <JJ>')
-    get_pattern(data, r'<VB> <RB>')
+    # get_pattern(data, r'<VB> <JJ>')
+    # get_pattern(data, r'<VB> <RB>')
 
     # show_pos("")
 

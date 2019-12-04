@@ -27,9 +27,9 @@
         </h2>
 
         <div class="meta">
-          <p>79,445 bedrooms</p>
+          <p>74,388 bedrooms</p>
           <p>77,371.5 bathrooms</p>
-          <p>302,976,590 sq ft</p>
+          <p>40,638,630 sq ft</p>
           <!-- <p>$32,287,410 Monthly Fees</p> -->
         </div>
         <p id="neighborhoods">
@@ -13861,12 +13861,12 @@
           <div id="calculator-app" class="has-bg">
             <p>Learn about how you can manage your repayments on the New York Apartment.</p>
 
-            <p class="total">Apartment Price: ${{price}}</p>
-            <p class="slide-2">
-                  $ <input type="number" v-model="price" size="20" @change="calculate" style="width: 5rem;">
-                  <input type="range" min="1" max="10000000" v-model="price" class="" size="4" @change="calculate">
-                </p>
-            <p>$636 per ft² | $598,637 per bedroom | $614,684 per bathroom</p>
+            <p class="total">Apartment Price: ${{price | format}}</p>
+            <!-- <p class="slide&#45;2"> -->
+            <!--       $ <input type="number" v&#45;model="price" size="20" @change="calculate" style="width: 5rem;"> -->
+            <!--       <input type="range" min="1" max="10000000" v&#45;model="price" class="" size="4" @change="calculate"> -->
+            <!--     </p> -->
+            <p style="margin-bottom:60px:">${{pricePerFoot|format}} per ft² | ${{pricePerBedroom|format}} per bedroom | ${{pricePerBath|format}} per bathroom</p>
 
             <div class="calc-grid">
               <div class="calculator-input">
@@ -13916,10 +13916,9 @@
                 <tr><td>HOA:</td><td>$<animated-integer :value="hoa" /></td></tr>
                 <tr><td>Interest and principle:</td><td>$<animated-integer :value="interestPrinciple" /></td></tr>
                 <tr><td>Total Monthly Payment:</td><td>$<animated-integer :value="monthly" /></td></tr>
-                <tr><td>Percent of Monthly Salary:</td><td><animated-integer :value="percentOfSalary"></animated-integer> %</td></tr>
               </table>
 
-              <p class="total">Estimated amortization calculations: </p>
+              <p class="total">Estimated amortization calculations</p>
               <table class="calc-table">
                 <tr><td style="width:60%">Deposit:</td><td> $<animated-integer :value="dep" /> </td></tr>
                 <tr><td>Total Principal Paid:</td><td> $<animated-integer :value="mortgage" /> </td></tr>
@@ -13932,6 +13931,7 @@
               <p>It is recommended that 30% of household income should be spent on housing costs. Based on your current salary:<p>
 
               <table class="calc-table">
+                <tr><td>Percent of Monthly Salary:</td><td><animated-integer :value="percentOfSalary"></animated-integer>%</td></tr>
                 <tr><td style="width: 50%">Portion of the apartment you can afford:</td><td>{{percentageofApt}}%</td></tr>
                 <!-- <tr><td style="width: 50%">Square feet:</td><td><animated&#45;integer :value="sqftafford" ></animated&#45;integer> sq ft</td></tr> -->
                 <!-- <tr><td style="width: 50%">Bedrooms:</td><td><animated&#45;integer :value="brafford"></animated&#45;integer></td></tr> -->

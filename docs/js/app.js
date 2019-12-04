@@ -1,6 +1,16 @@
 const imgBase =
   "http://68.183.151.133/images/https___static.trulia-cdn.com_pictures_thumbs_6_zillowstatic";
 
+const meta = {
+  // beds: 79445.0,
+  // baths: 77371.5,
+  beds: 74388.0,
+  baths: 61888.5,
+  sqft: 40638630.0,
+  price: 47558777359.0,
+  hoa: 32287410,
+};
+
 let allImages = [];
 
 function shuffleArray(array) {
@@ -284,7 +294,7 @@ Vue.component("animated-integer", {
 const CalculatorApp = new Vue({
   el: "#calculator-app",
   data: {
-    price: 47558777359,
+    price: meta.price,
     mortgage: 0,
     monthly: 0,
     down: 20,
@@ -307,6 +317,9 @@ const CalculatorApp = new Vue({
     percentageofApt: 0,
     sqftafford: 0,
     brafford: 0,
+    pricePerFoot: meta.price / meta.sqft,
+    pricePerBedroom: meta.price / meta.beds,
+    pricePerBath: meta.price / meta.baths,
   },
 
   methods: {
@@ -330,19 +343,22 @@ const CalculatorApp = new Vue({
         }
 
         this.tax = this.price * 0.0014;
-        this.hoa = 32287410;
+        this.hoa = meta.hoa;
         //this.hoa=0;
 
         this.monthly = this.sum(this.tax, this.hoa, this.interestPrinciple);
         this.totalInterest = this.monthly * totalPayments - this.mortgage;
         this.end = new Date().getFullYear() + Number(this.y);
         this.carbon = 408.53 + this.y * 2.5;
-        this.temperature = this.carbon*0.008474576;
+        this.temperature = this.carbon * 0.008474576;
         this.insects = 100 * (1 - Math.pow(0.975, this.y));
-        this.percentOfSalary = (this.monthly / ((this.salary*0.7) / 12)) * 100;
-        this.percentageofApt = parseFloat(((0.3*this.salary*0.7)/this.monthly).toFixed(6));
-        this.sqftafford = this.percentageofApt*302976590;
-        this.brafford = this.percentageofApt*79445;
+        this.percentOfSalary =
+          (this.monthly / ((this.salary * 0.7) / 12)) * 100;
+        this.percentageofApt = parseFloat(
+          ((0.3 * this.salary * 0.7) / this.monthly).toFixed(6)
+        );
+        this.sqftafford = this.percentageofApt * meta.sqft;
+        this.brafford = this.percentageofApt * meta.beds;
       });
     },
 
@@ -372,6 +388,12 @@ const CalculatorApp = new Vue({
       this.price = parseInt(this.price) === 0 ? null : this.price;
     },
   },
+  filters: {
+    format: function(num) {
+      num = num.toFixed(0);
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+  }
 });
 
 async function setupQuestions() {
@@ -446,7 +468,7 @@ async function setupQuestions() {
   });
 }
 
-setupQuestions();
+// setupQuestions();
 
 const modal = document.querySelector("#modal");
 const closeModal = document.querySelector("#close-modal");
