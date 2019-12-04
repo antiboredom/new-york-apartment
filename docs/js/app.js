@@ -396,6 +396,32 @@ const CalculatorApp = new Vue({
   }
 });
 
+// const QuestionApp = new Vue({
+//   el: "#question-app",
+//   data: { questions: [], index: 0 },
+//   async created() {
+//     let response = await fetch("data/selected_questions.txt");
+//     let questions = await response.text();
+//     this.questions = questions.split("\n");
+//
+//     this.interval = setInterval(this.next, 1000);
+//   },
+//
+//   methods: {
+//     next() {
+//       this.index++;
+//       if (this.index >= this.questions.length) {
+//         this.index = 0;
+//       }
+//     },
+//   },
+//   computed: {
+//     question() {
+//       return this.questions[this.index];
+//     }
+//   }
+// });
+
 async function setupQuestions() {
   if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
     return false;
