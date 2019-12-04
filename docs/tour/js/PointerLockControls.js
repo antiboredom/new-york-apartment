@@ -31,9 +31,35 @@ THREE.PointerLockControls = function ( camera, domElement ) {
 
 	var vec = new THREE.Vector3();
 
-	function onMouseMove( event ) {
+  var startx = 0
+  var starty = 0
 
-		if ( scope.isLocked === false ) return;
+  document.addEventListener('touchmove', e => {
+    // e.preventDefault()
+    var touchobj = e.changedTouches[0] // reference first touch point for this event
+
+    var movementX = parseInt(touchobj.clientX) - startx
+    var movementY = parseInt(touchobj.clientY) - starty
+
+		euler.setFromQuaternion( camera.quaternion );
+		euler.y += movementX * 0.002;
+		euler.x += movementY * 0.002;
+
+		euler.x = Math.max( - PI_2, Math.min( PI_2, euler.x ) );
+
+		camera.quaternion.setFromEuler( euler );
+    startx = parseInt(touchobj.clientX);
+    starty = parseInt(touchobj.clientY);
+  }, false);
+
+  document.addEventListener('touchstart', function(e){
+    var touchobj = e.changedTouches[0];
+    startx = parseInt(touchobj.clientX);
+    starty = parseInt(touchobj.clientY);
+  }, false)
+
+	function onMouseMove( event ) {
+		if ( scope.isLocked === false && !/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) return;
 
 		var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
 		var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
@@ -138,7 +164,11 @@ THREE.PointerLockControls = function ( camera, domElement ) {
 
 	this.lock = function () {
 
-		this.domElement.requestPointerLock();
+    try {
+      this.domElement.requestPointerLock();
+    } catch (e) {
+
+    }
 
 	};
 

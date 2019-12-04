@@ -75,8 +75,11 @@ function addClickLock() {
   document.body.addEventListener(
     "click",
     function() {
-      controls.lock();
       document.querySelector("#clicktolock").style.display = "none";
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        document.querySelector("#mobile-controls").style.display = "block";
+      }
+      controls.lock();
     },
     false
   );
@@ -121,6 +124,54 @@ class Player {
   }
 
   setListeners() {
+    document.querySelector('#u').addEventListener('touchstart', e => {
+      this.moveDown = true;
+    });
+
+    document.querySelector('#u').addEventListener('touchend', e => {
+      this.moveDown = false;
+    });
+
+    document.querySelector('#d').addEventListener('touchstart', e => {
+      this.moveUp = true;
+    });
+
+    document.querySelector('#d').addEventListener('touchend', e => {
+      this.moveUp = false;
+    });
+
+    document.querySelector('#l').addEventListener('touchstart', e => {
+      this.moveLeft = true;
+    });
+
+    document.querySelector('#l').addEventListener('touchend', e => {
+      this.moveLeft = false;
+    });
+
+    document.querySelector('#r').addEventListener('touchstart', e => {
+      this.moveRight = true;
+    });
+
+    document.querySelector('#r').addEventListener('touchend', e => {
+      this.moveRight = false;
+    });
+
+    document.querySelector('#f').addEventListener('touchstart', e => {
+      this.moveForward = true;
+    });
+
+    document.querySelector('#f').addEventListener('touchend', e => {
+      this.moveForward = false;
+    });
+
+    document.querySelector('#b').addEventListener('touchstart', e => {
+      this.moveBackward = true;
+    });
+
+    document.querySelector('#b').addEventListener('touchend', e => {
+      this.moveBackward = false;
+    });
+
     document.addEventListener(
       "keydown",
       event => {
