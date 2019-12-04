@@ -303,6 +303,10 @@ const CalculatorApp = new Vue({
     insects: 100,
     totalInterest: 0,
     percentOfSalary: 0,
+    temperature: 0,
+    percentageofApt: 0,
+    sqftafford: 0,
+    brafford: 0,
   },
 
   methods: {
@@ -327,13 +331,18 @@ const CalculatorApp = new Vue({
 
         this.tax = this.price * 0.0014;
         this.hoa = 32287410;
+        //this.hoa=0;
 
         this.monthly = this.sum(this.tax, this.hoa, this.interestPrinciple);
         this.totalInterest = this.monthly * totalPayments - this.mortgage;
         this.end = new Date().getFullYear() + Number(this.y);
         this.carbon = 408.53 + this.y * 2.5;
+        this.temperature = this.carbon*0.008474576;
         this.insects = 100 * (1 - Math.pow(0.975, this.y));
-        this.percentOfSalary = (this.monthly / (this.salary / 12)) * 100;
+        this.percentOfSalary = (this.monthly / ((this.salary*0.7) / 12)) * 100;
+        this.percentageofApt = parseFloat(((0.3*this.salary*0.7)/this.monthly).toFixed(6));
+        this.sqftafford = this.percentageofApt*302976590;
+        this.brafford = this.percentageofApt*79445;
       });
     },
 

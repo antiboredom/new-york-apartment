@@ -13859,10 +13859,14 @@
         <div class="inner-section">
           <h3>Mortgage calculator</h3>
           <div id="calculator-app" class="has-bg">
-
-            <p class="total">Apartment Price: ${{price}}</p>$636 per ft² | $598,637 per bedroom | $614,684 per bathroom
-
             <p>Learn about how you can manage your repayments on the New York Apartment.</p>
+
+            <p class="total">Apartment Price: ${{price}}</p>
+            <p class="slide-2">
+                  $ <input type="number" v-model="price" size="20" @change="calculate" style="width: 5rem;">
+                  <input type="range" min="1" max="10000000" v-model="price" class="" size="4" @change="calculate">
+                </p>
+            <p>$636 per ft² | $598,637 per bedroom | $614,684 per bathroom</p>
 
             <div class="calc-grid">
               <div class="calculator-input">
@@ -13912,7 +13916,7 @@
                 <tr><td>HOA:</td><td>$<animated-integer :value="hoa" /></td></tr>
                 <tr><td>Interest and principle:</td><td>$<animated-integer :value="interestPrinciple" /></td></tr>
                 <tr><td>Total Monthly Payment:</td><td>$<animated-integer :value="monthly" /></td></tr>
-                <tr><td>Percent of Monthly Salary:</td><td><animated-integer :value="percentOfSalary" /> %</td></tr>
+                <tr><td>Percent of Monthly Salary:</td><td><animated-integer :value="percentOfSalary"></animated-integer> %</td></tr>
               </table>
 
               <p class="total">Estimated amortization calculations: </p>
@@ -13921,13 +13925,22 @@
                 <tr><td>Total Principal Paid:</td><td> $<animated-integer :value="mortgage" /> </td></tr>
                 <tr><td>Total Interest Paid:</td><td> $<animated-integer :value="totalInterest" /> </td></tr>
                 <tr><td>Mortgage payoff date:</td><td><animated-integer :value="end" :formatting="false" /></td></tr>
-                <tr><td>Estimated atmospheric CO2 at payoff date:</td><td><animated-integer :value="carbon" :formatting="false" /> ppm</td></tr>
+                <tr><td>Estimated atmospheric CO2 at payoff date:</td><td><animated-integer :value="carbon" :formatting="false"></animated-integer> ppm</td></tr>
+                <tr><td>Estimated temperature rise:</td><td><animated-integer :value="temperature" :formatting="false"></animated-integer> degrees</td></tr>
+              </table>
+              <p class="total">How much house could I afford?</p>
+              <p>It is recommended that 30% of household income should be spent on housing costs.* Based on your current salary:<p>
+
+              <table class="calc-table">
+                <tr><td style="width: 50%">Portion of the apartment you can afford:</td><td>{{percentageofApt}}%</td></tr>
+                <tr><td style="width: 50%">Square feet:</td><td><animated-integer :value="sqftafford" ></animated-integer> sq ft</td></tr>
+                <tr><td style="width: 50%">Bedrooms:</td><td><animated-integer :value="brafford"></animated-integer></td></tr>
               </table>
             </div>
             <!-- <p>Estimated temperature change at payoff: {{carbon}} ppm</p> -->
             <!-- <p>Estimated sea level rise at payoff: {{carbon}} ppm</p> -->
           </div>
-        </div>
+        <p id="neighborhoods">*This recommendation is evolved from the Brooke Amendment (1969) of the United States National Housing Act of 1937. </p></div>
         <br><br>
       </section>
 
