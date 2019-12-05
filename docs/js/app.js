@@ -1,5 +1,5 @@
 const imgBase =
-  "http://68.183.151.133/images/https___static.trulia-cdn.com_pictures_thumbs_6_zillowstatic";
+  "https://sam.nyc3.digitaloceanspaces.com/apartment-images/https___static.trulia-cdn.com_pictures_thumbs_6_zillowstatic";
 
 const meta = {
   // beds: 79445.0,
@@ -392,8 +392,8 @@ const CalculatorApp = new Vue({
     format: function(num) {
       num = num.toFixed(0);
       return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-    }
-  }
+    },
+  },
 });
 
 // const QuestionApp = new Vue({
