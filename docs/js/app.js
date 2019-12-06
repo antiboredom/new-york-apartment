@@ -509,12 +509,28 @@ function addTourListener(b) {
   });
 }
 
+function onCloseModal() {
+  frame.src = "";
+  modal.style.display = "none";
+}
+
 for (let b of openModalButtons) {
   addTourListener(b);
 }
 
 closeModal.addEventListener("click", function(e) {
   e.preventDefault();
-  frame.src = "";
-  modal.style.display = "none";
+  onCloseModal();
 });
+
+window.addEventListener("keydown", function(e) {
+  if (e.key == "Escape") {
+    onCloseModal();
+  }
+});
+
+window.onmessage = function(e) {
+  if (e.data == "escape") {
+    onCloseModal();
+  }
+};

@@ -90,6 +90,7 @@ THREE.PointerLockControls = function ( camera, domElement ) {
 			scope.dispatchEvent( unlockEvent );
 
 			scope.isLocked = false;
+      window.top.postMessage('escape', '*')
 
 		}
 

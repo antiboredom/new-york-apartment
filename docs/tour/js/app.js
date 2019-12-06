@@ -78,6 +78,8 @@ function addClickLock() {
       document.querySelector("#clicktolock").style.display = "none";
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         document.querySelector("#mobile-controls").style.display = "block";
+      } else {
+        document.querySelector("#desktop-instructions").style.display = "block";
       }
       controls.lock();
     },
