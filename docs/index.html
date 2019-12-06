@@ -14181,7 +14181,6 @@
           <div id="contact-app">
             <h3>Contact {{agents.length}} real estate agents</h3>
             <div class="has-bg">
-              <button @click="contactBatches">Click here to express your interest in the New York Apartment by sending a text message to all NYC brokers.</button>
               <div id="agent-list">
                 <a v-for="(a, i) in agents" :href="'tel:' + a[1]">📞 Call {{a[0]}}</a>
               </div>
