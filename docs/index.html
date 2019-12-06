@@ -14082,6 +14082,7 @@
           </ul>
         </div>
       </section>
+
       <section>
         <div class="inner-section">
           <h3>Mortgage calculator</h3>
@@ -14100,7 +14101,7 @@
                 <p class="slide calc-bold">Interest rate</p>
                 <p class="slide-2">
                   <input type="number" min="0" step="0.1" v-model="r" size="2" @change="calculate"> %
-                  <input type="range" min="0" max="100" step="0.1" v-model="r" class="" size="4" @change="calculate">
+                  <input type="range" min="0" max="100" step="0.1" v-model="r" size="4" @change="calculate">
                 </p>
               </div>
 
@@ -14108,7 +14109,7 @@
                 <p class="slide calc-bold">Loan term</p>
                 <p class="slide-2">
                   <input type="number" v-model="y" @change="calculate"> years
-                  <input type="range" min="1" max="1000" step="1" v-model="y" class="" size="4" @change="calculate">
+                  <input type="range" min="1" max="1000" step="1" v-model="y" size="4" @change="calculate">
                 </p>
               </div>
 
@@ -14116,7 +14117,7 @@
                 <p class="slide calc-bold">Down payment</p>
                 <p class="slide-2">
                   <input type="number" v-model="down" size="4" @change="calculate"> %
-                  <input type="range" min="1" max="100" step="1" v-model="down" class="" size="4" @change="calculate">
+                  <input type="range" min="1" max="100" step="1" v-model="down" size="4" @change="calculate">
                 </p>
               </div>
 
@@ -14124,7 +14125,7 @@
                 <p class="slide calc-bold">Your salary</p>
                 <p class="slide-2">
                   $ <input type="number" v-model="salary" size="20" @change="calculate" style="width: 5rem;">
-                  <input type="range" min="1" max="10000000" v-model="salary" class="" size="4" @change="calculate">
+                  <input type="range" min="1" max="10000000" v-model="salary" size="4" @change="calculate">
                 </p>
               </div>
             </div>
@@ -14132,30 +14133,30 @@
             <p style="text-align: center"><button v-on:click="calculate" class="calculate">Calculate</button></p>
 
             <p class="total">
-              Estimated Monthly Payment: $<span v-if="monthly>0"> <animated-integer :value="monthly" /></span><span v-else>???</span>
+              Estimated Monthly Payment: $<span v-if="monthly>0"> <animated-integer :value="monthly"></animated-integer></span><span v-else>???</span>
             </p>
 
             <p>How is my monthly payment calculated?</p>
 
             <div class="calc-results">
               <table class="calc-table">
-                <tr><td style="width: 50%">Property tax:</td><td>$<animated-integer :value="tax" /></td></tr>
-                <tr><td>HOA:</td><td>$<animated-integer :value="hoa" /></td></tr>
-                <tr><td>Interest and principle:</td><td>$<animated-integer :value="interestPrinciple" /></td></tr>
-                <tr><td>Total Monthly Payment:</td><td>$<animated-integer :value="monthly" /></td></tr>
+                <tr><td style="width: 50%">Property tax:</td><td>$<animated-integer :value="tax"></animated-integer></td></tr>
+                <tr><td>HOA:</td><td>$<animated-integer :value="hoa"></animated-integer></td></tr>
+                <tr><td>Interest and principle:</td><td>$<animated-integer :value="interestPrinciple"></animated-integer></td></tr>
+                <tr><td>Total Monthly Payment:</td><td>$<animated-integer :value="monthly"></animated-integer></td></tr>
               </table>
 
               <p class="total">Estimated amortization calculations</p>
               <table class="calc-table">
-                <tr><td style="width:60%">Deposit:</td><td> $<animated-integer :value="dep" /> </td></tr>
-                <tr><td>Total Principal Paid:</td><td> $<animated-integer :value="mortgage" /> </td></tr>
-                <tr><td>Total Interest Paid:</td><td> $<animated-integer :value="totalInterest" /> </td></tr>
-                <tr><td>Mortgage payoff date:</td><td><animated-integer :value="end" :formatting="false" /></td></tr>
+                <tr><td style="width:60%">Deposit:</td><td> $<animated-integer :value="dep"></animated-integer></td></tr>
+                <tr><td>Total Principal Paid:</td><td> $<animated-integer :value="mortgage"></animated-integer></td></tr>
+                <tr><td>Total Interest Paid:</td><td> $<animated-integer :value="totalInterest"></animated-integer></td></tr>
+                <tr><td>Mortgage payoff date:</td><td><animated-integer :value="end" :formatting="false"></animated-integer></td></tr>
                 <tr><td>Estimated atmospheric CO2 at payoff date:</td><td><animated-integer :value="carbon" :formatting="false"></animated-integer> ppm</td></tr>
                 <tr><td>Estimated temperature rise:</td><td><animated-integer :value="temperature" :formatting="false"></animated-integer> degrees</td></tr>
               </table>
               <p class="total">How much house could I afford?</p>
-              <p>It is recommended that 30% of household income should be spent on housing costs. Based on your current salary:<p>
+              <p>It is recommended that 30% of household income should be spent on housing costs. Based on your current salary:</p>
 
               <table class="calc-table">
                 <tr><td>Percent of Monthly Salary:</td><td><animated-integer :value="percentOfSalary"></animated-integer>%</td></tr>
@@ -14167,7 +14168,7 @@
             <!-- <p>Estimated temperature change at payoff: {{carbon}} ppm</p> -->
             <!-- <p>Estimated sea level rise at payoff: {{carbon}} ppm</p> -->
           </div>
-        <!-- <p id="neighborhoods">*This recommendation is evolved from the Brooke Amendment (1969) of the United States National Housing Act of 1937. </p></div> -->
+        </div>
         <br><br>
       </section>
 
