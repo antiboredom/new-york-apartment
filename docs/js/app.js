@@ -499,7 +499,7 @@ async function setupQuestions() {
 const modal = document.querySelector("#modal");
 const closeModal = document.querySelector("#close-modal");
 const openModalButtons = document.querySelectorAll(".open-tour");
-const frame = document.querySelector("iframe");
+const frame = document.querySelector("#modal iframe");
 
 function addTourListener(b) {
   b.addEventListener("click", function(e) {
