@@ -183,48 +183,48 @@ const ImageApp = new Vue({
   },
 });
 
-const ContactApp = new Vue({
-  el: "#contact-app",
-  data: { agents: [], index: 0, batchSize: 100 },
-  async created() {
-    let response = await fetch("data/agents.json");
-    this.agents = await response.json();
-  },
-  methods: {
-    contact() {
-      const totalPerMessage = this.batchSize;
-      const chunks = chunkArray(this.agents, totalPerMessage);
-      const urls = chunks.map(c => {
-        const numbers = c.map(a => a[1]).join(",");
-        return (url = `sms:/open?addresses=${numbers}&body=I'm interested in the New York Apartment`);
-      });
-
-      location.href = urls[this.index];
-      this.index++;
-
-      if (this.index >= urls.length) {
-        this.reset();
-      }
-    },
-    reset() {
-      this.index = 0;
-    },
-    async contactBatches() {
-      if (confirm("Are you sure?")) {
-        const totalPerMessage = this.batchSize;
-        const chunks = chunkArray(this.agents, totalPerMessage);
-        const urls = chunks.map(c => {
-          const numbers = c.map(a => a[1]).join(",");
-          return (url = `sms:/open?addresses=${numbers}&body=I'm interested in the New York Apartment`);
-        });
-        for (let url of urls) {
-          location.href = url;
-          await sleep(100);
-        }
-      }
-    },
-  },
-});
+// const ContactApp = new Vue({
+//   el: "#contact-app",
+//   data: { agents: [], index: 0, batchSize: 100 },
+//   async created() {
+//     let response = await fetch("data/agents.json");
+//     this.agents = await response.json();
+//   },
+//   methods: {
+//     contact() {
+//       const totalPerMessage = this.batchSize;
+//       const chunks = chunkArray(this.agents, totalPerMessage);
+//       const urls = chunks.map(c => {
+//         const numbers = c.map(a => a[1]).join(",");
+//         return (url = `sms:/open?addresses=${numbers}&body=I'm interested in the New York Apartment`);
+//       });
+//
+//       location.href = urls[this.index];
+//       this.index++;
+//
+//       if (this.index >= urls.length) {
+//         this.reset();
+//       }
+//     },
+//     reset() {
+//       this.index = 0;
+//     },
+//     async contactBatches() {
+//       if (confirm("Are you sure?")) {
+//         const totalPerMessage = this.batchSize;
+//         const chunks = chunkArray(this.agents, totalPerMessage);
+//         const urls = chunks.map(c => {
+//           const numbers = c.map(a => a[1]).join(",");
+//           return (url = `sms:/open?addresses=${numbers}&body=I'm interested in the New York Apartment`);
+//         });
+//         for (let url of urls) {
+//           location.href = url;
+//           await sleep(100);
+//         }
+//       }
+//     },
+//   },
+// });
 
 Vue.component("animated-integer", {
   template: "<span>{{ formattedValue }}</span>",

@@ -1,0 +1,26 @@
+from glob import glob
+
+paths = glob("/Users/sam/projects/new-york-apartment/justdoors2/just_doors2/*.jpg")
+
+x = 0
+y = 0
+w = 53
+totalwidth = w
+totalheight = 20000
+
+size(500, 500)
+
+for f in paths[0:-7]:
+    img = image(f, x, y, plot=False)
+    imwidth, imheight = img.size
+    h = imheight * (w / imwidth)
+    image(img, x, y, w, h, plot=True)
+    y += h
+    
+    if y > totalheight:
+        x += w
+        totalwidth += w
+        y = 0
+totalwidth -= w
+print(len(paths))        
+size(totalwidth, totalheight)
