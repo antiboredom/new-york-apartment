@@ -25,7 +25,7 @@ const defaults = {
 
 const scenes = {
   flat: {
-    model: "flat_4000.glb",
+    model: "packed_grid_huge.glb",
     start: [48.23045010769473, 75.22063006996052, -34.27884385033894],
     look: [300, -2, -300],
   },
@@ -37,7 +37,7 @@ const scenes = {
     dist: 1500,
   },
   tower: {
-    model: "tower.glb",
+    model: "tower_huge.glb",
     start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
     look: [0, 400, 0],
     // bg: 0xffeeff,
