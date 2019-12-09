@@ -30,11 +30,11 @@ const scenes = {
     look: [300, -2, -300],
   },
   pyramid: {
-    model: "thin_pyramid.glb",
-    start: [-73.65608801261031, 28.393634398036895, 147.0004790467669],
-    look: [0, 0, 0],
+    model: "pyramid_huge.glb",
+    start: [-1073.65608801261031, 28.393634398036895, 147.0004790467669],
+    look: [0, 590, 0],
     // bg: 0xffeeff,
-    dist: 5000,
+    dist: 1500,
   },
   tower: {
     model: "tower.glb",
@@ -356,8 +356,8 @@ async function init() {
       // scene.add(lines);
 
       // you can play around with each floorplan's position/rotation below
-      o.order = o.position.y / 9;
-      o.rspeed = o.position.x * 0.000001;
+      // o.order = o.position.y / 9;
+      // o.rspeed = o.position.x * 0.000001;
       // o.position.set(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 500 - 250);
       // o.rotation.set(0, o.position.y * 0.01, 0);
       // o.position.x = Math.sin(o.position.y) * 10;
@@ -422,18 +422,6 @@ async function init() {
 
 function animate() {
   requestAnimationFrame(animate);
-
-  // if you want to animate each floorplan...
-  if (towerMesh) {
-    towerMesh.traverse(o => {
-      if (o.isMesh) {
-        // o.rotation.y += o.rspeed;
-        // o.rotation.y += o.rspeed/2;
-        // o.position.x = Math.sin(delta/2 + o.order)*115;
-        // o.position.z = Math.cos(delta/2 + o.order)*115;
-      }
-    });
-  }
 
   player.update();
 
