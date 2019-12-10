@@ -411,12 +411,16 @@ async function init() {
     dirFolder2.add(directionalLight2.position, "z", -10, 10);
     dirFolder2.open();
 
-    const matFolder = gui.addFolder("Material");
-    matFolder.add(testMat, "roughness", 0, 1);
-    matFolder.add(testMat, "metalness", 0, 1);
-    addGuiColor(matFolder, testMat, "color");
-    addGuiColor(matFolder, testMat, "emissive");
-    matFolder.open();
+    // const matFolder = gui.addFolder("Material");
+    // matFolder.add(testMat, "roughness", 0, 1);
+    // matFolder.add(testMat, "metalness", 0, 1);
+    // addGuiColor(matFolder, testMat, "color");
+    // addGuiColor(matFolder, testMat, "emissive");
+    // matFolder.open();
+  }
+
+  if (getUrlParameter("gui")) {
+    makeGUI();
   }
 }
 
