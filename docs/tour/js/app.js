@@ -126,51 +126,51 @@ class Player {
   }
 
   setListeners() {
-    document.querySelector('#u').addEventListener('touchstart', e => {
+    document.querySelector("#u").addEventListener("touchstart", e => {
       this.moveDown = true;
     });
 
-    document.querySelector('#u').addEventListener('touchend', e => {
+    document.querySelector("#u").addEventListener("touchend", e => {
       this.moveDown = false;
     });
 
-    document.querySelector('#d').addEventListener('touchstart', e => {
+    document.querySelector("#d").addEventListener("touchstart", e => {
       this.moveUp = true;
     });
 
-    document.querySelector('#d').addEventListener('touchend', e => {
+    document.querySelector("#d").addEventListener("touchend", e => {
       this.moveUp = false;
     });
 
-    document.querySelector('#l').addEventListener('touchstart', e => {
+    document.querySelector("#l").addEventListener("touchstart", e => {
       this.moveLeft = true;
     });
 
-    document.querySelector('#l').addEventListener('touchend', e => {
+    document.querySelector("#l").addEventListener("touchend", e => {
       this.moveLeft = false;
     });
 
-    document.querySelector('#r').addEventListener('touchstart', e => {
+    document.querySelector("#r").addEventListener("touchstart", e => {
       this.moveRight = true;
     });
 
-    document.querySelector('#r').addEventListener('touchend', e => {
+    document.querySelector("#r").addEventListener("touchend", e => {
       this.moveRight = false;
     });
 
-    document.querySelector('#f').addEventListener('touchstart', e => {
+    document.querySelector("#f").addEventListener("touchstart", e => {
       this.moveForward = true;
     });
 
-    document.querySelector('#f').addEventListener('touchend', e => {
+    document.querySelector("#f").addEventListener("touchend", e => {
       this.moveForward = false;
     });
 
-    document.querySelector('#b').addEventListener('touchstart', e => {
+    document.querySelector("#b").addEventListener("touchstart", e => {
       this.moveBackward = true;
     });
 
-    document.querySelector('#b').addEventListener('touchend', e => {
+    document.querySelector("#b").addEventListener("touchend", e => {
       this.moveBackward = false;
     });
 
@@ -275,6 +275,8 @@ async function init() {
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
+  // renderer.gammaInput = true;
+  // renderer.gammaOutput = true;
 
   container.appendChild(renderer.domElement);
 
@@ -313,31 +315,31 @@ async function init() {
     new THREE.MeshStandardMaterial({
       color: 0xbababa,
       flatShading: false,
-      roughness: 0.3,
+      roughness: 0.9,
       metalness: 0.5,
     }),
     new THREE.MeshStandardMaterial({
       color: 0xcccccc,
       flatShading: false,
-      roughness: 0.3,
+      roughness: 0.9,
       metalness: 0.5,
     }),
     new THREE.MeshStandardMaterial({
       color: 0xeeeeee,
       flatShading: false,
-      roughness: 0.3,
+      roughness: 0.9,
       metalness: 0.5,
     }),
     new THREE.MeshStandardMaterial({
       color: 0xdbdbdb,
       flatShading: false,
-      roughness: 0.3,
+      roughness: 0.9,
       metalness: 0.5,
     }),
     new THREE.MeshStandardMaterial({
       color: 0xdddddd,
       flatShading: false,
-      roughness: 0.3,
+      roughness: 0.9,
       metalness: 0.5,
     }),
   ];
@@ -345,8 +347,6 @@ async function init() {
   towerMesh.traverse(o => {
     if (o.isMesh) {
       o.material = mats[Math.floor(Math.random() * mats.length)];
-      o.material.receiveShadow = true;
-      o.material.castShadow = true;
       // const edges = new THREE.EdgesGeometry(o.geometry); // or WireframeGeometry
       // const mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
       // const lines = new THREE.LineSegments(edges, mat);
@@ -398,17 +398,17 @@ async function init() {
     const dirFolder = gui.addFolder("Directional Light");
     addGuiColor(dirFolder, directionalLight, "color");
     dirFolder.add(directionalLight, "intensity", 0, 2);
-    dirFolder.add(directionalLight.position, "x", -10, 10);
-    dirFolder.add(directionalLight.position, "y", -10, 10);
-    dirFolder.add(directionalLight.position, "z", -10, 10);
+    dirFolder.add(directionalLight.position, "x", -100, 100);
+    dirFolder.add(directionalLight.position, "y", -100, 100);
+    dirFolder.add(directionalLight.position, "z", -100, 100);
     dirFolder.open();
 
     const dirFolder2 = gui.addFolder("Directional Light 2");
     addGuiColor(dirFolder2, directionalLight2, "color");
     dirFolder2.add(directionalLight2, "intensity", 0, 2);
-    dirFolder2.add(directionalLight2.position, "x", -10, 10);
-    dirFolder2.add(directionalLight2.position, "y", -10, 10);
-    dirFolder2.add(directionalLight2.position, "z", -10, 10);
+    dirFolder2.add(directionalLight2.position, "x", -100, 100);
+    dirFolder2.add(directionalLight2.position, "y", -100, 100);
+    dirFolder2.add(directionalLight2.position, "z", -100, 100);
     dirFolder2.open();
 
     // const matFolder = gui.addFolder("Material");
