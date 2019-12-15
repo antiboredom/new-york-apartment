@@ -2,25 +2,63 @@ from glob import glob
 
 paths = glob("/Users/sam/projects/new-york-apartment/justdoors2/just_doors2/*.jpg")
 
-x = 0
-y = 0
-w = 53
-totalwidth = w
-totalheight = 20000
-
-size(500, 500)
-
-for f in paths[0:-7]:
-    img = image(f, x, y, plot=False)
-    imwidth, imheight = img.size
-    h = imheight * (w / imwidth)
-    image(img, x, y, w, h, plot=True)
-    y += h
+def multi_col():
+    x = 0
+    y = 0
+    w = 53
+    totalwidth = w
+    totalheight = 20000
     
-    if y > totalheight:
-        x += w
-        totalwidth += w
-        y = 0
-totalwidth -= w
-print(len(paths))        
-size(totalwidth, totalheight)
+    size(500, 500)
+    
+    for f in paths[0:-7]:
+        img = image(f, x, y, plot=False)
+        imwidth, imheight = img.size
+        h = imheight * (w / imwidth)
+        image(img, x, y, w, h, plot=True)
+        y += h
+        
+        if y > totalheight:
+            x += w
+            totalwidth += w
+            y = 0
+    totalwidth -= w
+    print(len(paths))        
+    size(totalwidth, totalheight)
+    
+    
+    
+def singlecol():
+    x = 0
+    y = 0
+    w = 25
+    totalwidth = w
+    max_height = 5000
+    
+    num = 0
+    
+    for f in paths:
+        img = image(f, x, y, plot=False)
+        imwidth, imheight = img.size
+        h = imheight * (w / imwidth)
+        image(img, x, y, w, h, plot=True)
+        y += h
+        
+        if y > max_height:
+           outname = "doors_{}.jpg".format(str(num).zfill(4))
+          
+           print(w, y-h)
+           size(w, y-h)
+           export(outname)
+           clear()
+           y = 0
+           num += 1
+    
+     
+    
+    
+singlecol()
+    
+    
+    
+    

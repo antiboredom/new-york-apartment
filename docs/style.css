@@ -104,6 +104,17 @@ p.total {
   display: block;
 }
 
+#long-doors {
+  min-width: 40px;
+  padding: 0;
+  /* border-right: 20px solid #eee; */
+}
+
+#long-doors img {
+  width: 100%;
+  display: block;
+}
+
 #credits {
   border-top: 1px solid #888;
   padding-top: 10px;
