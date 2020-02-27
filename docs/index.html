@@ -29,63 +29,9 @@
           <p>74,388 bedrooms</p>
           <p>77,371.5 bathrooms</p>
           <p>40,638,630 sq ft</p>
-          <!-- <p>$32,287,410 Monthly Fees</p> -->
         </div>
-        <!-- <p id="neighborhoods"> -->
-        <!--   Located in Annadale, Arden Heights, Arrochar, Arverne, Astoria -->
-        <!--   Heights, Astoria, Auburndale, Bath Beach, Battery Park, Bay Ridge, Bay -->
-        <!--   Terrace, Baychester, Bayside, Bedford Park, Bedford Stuyvesant, Belle -->
-        <!--   Harbor, Bellerose, Belmont, Bensonhurst, Bergen Beach, Blissville, -->
-        <!--   Bloomfield, Boerum Hill, Borough Park, Breezy Point, Briarwood, -->
-        <!--   Brighton Beach, Broad Channel, Brooklyn Heights, Brownsville, Bulls -->
-        <!--   Head, Bushwick, Butler Manor, Cambria Heights, Canarsie, Carnegie -->
-        <!--   Hill, Carroll Gardens, Castle Hill, Castleton Corners, Central Park, -->
-        <!--   Charleston, Chelsea, Chelsea&#45;Travis, Chinatown, City Island, Clason -->
-        <!--   Point, Clifton, Clinton Hill, Clove Lake, Co&#45;op City, Cobble Hill, -->
-        <!--   College Point, Columbia Street Waterfront District, Concourse, Coney -->
-        <!--   Island, Corona, Country Club, Crown Heights, DUMBO, Dongan Hills, -->
-        <!--   Douglaston&#45;Little Neck, Downtown, Dyker Heights, East Elmhurst, East -->
-        <!--   Flatbush, East Harlem, East New York, East Tremont, East Village, -->
-        <!--   Eastchester, Elm Park, Elmhurst, Eltingville, Emerson Hill, Far -->
-        <!--   Rockaway, Fieldston, Financial District, Flatbush, Flatiron District, -->
-        <!--   Flatlands, Floral park, Flushing Meadows Corona Park, Flushing, -->
-        <!--   Fordham, Forest Hills Gardens, Forest Hills, Fort Greene, Fort -->
-        <!--   Hamilton, Fort Wadsworth, Fresh Meadows, Garment District, Georgetown, -->
-        <!--   Gerritsen Beach, Glen Oaks, Glendale, Governors Island, Gowanus, -->
-        <!--   Gramercy, Graniteville, Grant City, Grasmere &#45; Concord, Gravesend, -->
-        <!--   Great Kills, Greenpoint, Greenridge, Greenwich Village, Greenwood, -->
-        <!--   Grymes Hill, Hamilton Heights, Harlem, Heartland Village, Hell's -->
-        <!--   Kitchen, High Bridge, Hillcrest, Hollis, Holliswood, Homecrest, Howard -->
-        <!--   Beach, Hudson Yards, Huguenot, Hunters Point, Hunts Point, Inwood, -->
-        <!--   Jackson Heights, Jamaica Estates, Jamaica Hills, Jamaica, Kensington, -->
-        <!--   Kew Gardens Hills, Kew Gardens, Kingsbridge, Laurelton, Lighthouse -->
-        <!--   Hill, Little Italy, Longwood, Lower East Side, Malba, Manhattan Beach, -->
-        <!--   Manhattanville, Marble Hill, Marine Park, Mariner's Harbor, Maspeth, -->
-        <!--   Meiers Corners, Melrose, Middle Village, Midland Beach, Midtown, -->
-        <!--   Midwood, Mill Basin, Morningside Heights, Morris Heights, Morris Park, -->
-        <!--   Mott Haven, Murray Hill, Neponsit, New Brighton, New Dorp Beach, New -->
-        <!--   Dorp, New Springville, New Utrecht, NoHo, North Riverdale, Norwood, -->
-        <!--   Oakland Gardens, Oakwood, Ocean Hill, Ocean Parkway, Old Town, Ozone -->
-        <!--   Park, Park Hill, Park Slope, Parkchester, Pelham Bay Park, Pelham Bay, -->
-        <!--   Pelham Gardens, Pleasant Plains, Pomonok, Port Ivory, Port Morris, -->
-        <!--   Port Richmond, Prince's Bay, Prospect Heights, Prospect Lefferts -->
-        <!--   Gardens, Prospect Park South, Queens Village, Randall Manor, Red Hook, -->
-        <!--   Rego Park, Richmond Hill, Richmond Town, Richmond Valley, Ridgewood, -->
-        <!--   Riverdale, Rochdale, Rockaway Beach, Rockaway Park, Roosevelt Island, -->
-        <!--   Rosebank, Rosedale, Rossville, Sheepshead Bay, Shore Acres, Silver -->
-        <!--   Lake, SoHo, Soundview, South Beach, South Bronx, South Ozone Park, -->
-        <!--   Springfield Gardens, Spuyten Duyvil, St. Albans, St. George, -->
-        <!--   Stapleton, Sunnyside, Sunset Park, Sutton Place, Throggs Neck, Todt -->
-        <!--   Hill, Tompkinsville, Tottenville, Tremont, Tribeca, Tudor City, Turtle -->
-        <!--   Bay, Unionport, University Heights, Upper East Side, Upper West Side, -->
-        <!--   Utopia, Van Nest, Vinegar Hill, Wakefield, Washington Heights, West -->
-        <!--   Brighton, West Farms, West Village, Westchester Heights, Westerleigh, -->
-        <!--   Whitestone, Williamsbridge, Williamsburg, Willowbrook, Windsor -->
-        <!--   Terrace, Wingate, Woodhaven, Woodlawn, Woodrow, and Woodside. -->
-        <!-- </p> -->
 
         <div id="questions-to-consider">
-          <!-- <p>Are you are doctor looking for an ideal place to see your patients?</p> -->
           <p>Are you constantly frustrated with seeing the same low grade renovations and design choices in townhouses?</p>
           <p>Are you in love with pre-war?</p>
           <p>Are you looking for a charming well-priced 1 Bedroom home in a sought-after area?</p>
@@ -300,12 +246,6 @@
 
         <p id="credits">Created by Sam Lavigne &amp; Tega Brain, commissioned by the Whitney Museum of American Art</p>
       </section>
-
-      <!-- <section id="question&#45;app&#45;container"> -->
-      <!--   <div id="question&#45;app"> -->
-      <!--     {{ question }} -->
-      <!--   </div> -->
-      <!-- </section> -->
 
       <section id="image-app-container">
         <div id="image-app" @mouseover="stopTimer">
@@ -14083,10 +14023,6 @@
             <p>Learn about how you can manage your repayments on the New York Apartment.</p>
 
             <p class="total">Apartment Price: ${{price | format}}</p>
-            <!-- <p class="slide&#45;2"> -->
-            <!--       $ <input type="number" v&#45;model="price" size="20" @change="calculate" style="width: 5rem;"> -->
-            <!--       <input type="range" min="1" max="10000000" v&#45;model="price" class="" size="4" @change="calculate"> -->
-            <!--     </p> -->
             <p style="margin-bottom:60px:">${{pricePerFoot|format}} per ft² | ${{pricePerBedroom|format}} per bedroom | ${{pricePerBath|format}} per bathroom</p>
 
             <div class="calc-grid">
@@ -14154,30 +14090,12 @@
               <table class="calc-table">
                 <tr><td>Percent of Monthly Salary:</td><td><animated-integer :value="percentOfSalary"></animated-integer>%</td></tr>
                 <tr><td style="width: 50%">Portion of the apartment you can afford:</td><td>{{percentageofApt}}%</td></tr>
-                <!-- <tr><td style="width: 50%">Square feet:</td><td><animated&#45;integer :value="sqftafford" ></animated&#45;integer> sq ft</td></tr> -->
-                <!-- <tr><td style="width: 50%">Bedrooms:</td><td><animated&#45;integer :value="brafford"></animated&#45;integer></td></tr> -->
               </table>
             </div>
-            <!-- <p>Estimated temperature change at payoff: {{carbon}} ppm</p> -->
-            <!-- <p>Estimated sea level rise at payoff: {{carbon}} ppm</p> -->
           </div>
         </div>
         <br><br>
       </section>
-
-      <!-- <section id="doors&#45;container"> -->
-      <!--   <img src="images/doors_all.jpg"> -->
-      <!-- </section> -->
-      <!-- <section> -->
-      <!--   <div class="inner&#45;section"> -->
-      <!--     <h3>Outlook</h3> -->
-      <!--     <img src="images/co2.png" /> -->
-      <!--     <img src="images/gdp.png" /> -->
-      <!--     <img src="images/monthly&#45;earnings.png" /> -->
-      <!--     <img src="images/rents&#45;homelessness.png" /> -->
-      <!--     <img src="images/sea&#45;level&#45;change.png" /> -->
-      <!--   </div> -->
-      <!-- </section> -->
 
       <section>
         <div class="inner-section">
@@ -14191,37 +14109,11 @@
           </div>
         </div>
       </section>
-      <!-- <section> -->
-      <!--   <h3>Stay in touch</h3> -->
-      <!--   <form> -->
-      <!--     <p>Keep up to date about the New York Apartment</p> -->
-      <!--     <input type="email" placeholder="email"><input type="submit" value="Subscribe"> -->
-      <!--   </form> -->
-      <!-- </section> -->
-      <!-- <section id="long&#45;doors"> -->
-      <!--   <img src="images/doors/doors_0000.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0001.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0002.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0003.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0004.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0004.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0005.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0007.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0009.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0010.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0011.jpg.small.jpg"> -->
-      <!--   <img src="images/doors/doors_0012.jpg.small.jpg"> -->
-      <!-- </section> -->
     </div>
+
     <div id="modal">
       <div class="modal-header">
         <h3>Explore your future home</h3>
-        <!-- <div id="tour&#45;instructions"> -->
-        <!--   <span>Look: Mouse</span> | -->
-        <!--   <span>Movement: WASD</span> | -->
-        <!--   <span>Go up/down: QE</span> | -->
-        <!--   <span>Exit: ESC</span> -->
-        <!-- </div> -->
         <a href="#" id="close-modal">Close</a>
       </div>
       <iframe src=""></iframe>
