@@ -9,3 +9,6 @@ scripts/videos_with_faces.txt
 scripts/toconcat.txt
 scripts/home_invader.mp4
 docs/videos/*.mp4
+dirty_trulia_json
+scripts/all_apartments.json
+scripts/meta.json

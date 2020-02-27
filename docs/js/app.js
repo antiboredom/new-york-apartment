@@ -1,7 +1,7 @@
 const imgBase =
   "https://sam.nyc3.digitaloceanspaces.com/apartment-images/https___static.trulia-cdn.com_pictures_thumbs_6_zillowstatic";
 
-const meta = {
+let meta = {
   // beds: 79445.0,
   // baths: 77371.5,
   beds: 74388.0,
@@ -320,6 +320,15 @@ const CalculatorApp = new Vue({
     pricePerFoot: meta.price / meta.sqft,
     pricePerBedroom: meta.price / meta.beds,
     pricePerBath: meta.price / meta.baths,
+  },
+
+  async created() {
+    let response = await fetch("https://sam.nyc3.digitaloceanspaces.com/meta.json");
+    meta = await response.json();
+    this.price = meta.price;
+    this.pricePerFoot = meta.price / meta.sqft;
+    this.pricePerBedroom = meta.price / meta.beds;
+    this.pricePerBath = meta.price / meta.baths;
   },
 
   methods: {

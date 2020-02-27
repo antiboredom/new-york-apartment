@@ -4,6 +4,7 @@ import spacy
 
 nlp = spacy.load("en_core_web_sm")
 
+
 def get_meta(data):
     total_beds = 0
     total_baths = 0
@@ -34,7 +35,15 @@ def get_meta(data):
     print("avg sqft {:,}".format(int(total_sqft / total)))
     print("avg price {:,}".format(int(total_price / total)))
     print("avg hoa {:,}".format(int(total_hoa / total)))
-    print("prc/ft {:,}".format(total_price/total_sqft))
+    print("prc/ft {:,}".format(total_price / total_sqft))
+
+    return {
+        "beds": total_beds,
+        "baths": total_baths,
+        "sqft": total_sqft,
+        "price": total_price,
+        "hoa": total_hoa
+    }
 
 
 def pos_regex_matches(doc, pattern, search_type="tag"):
@@ -84,10 +93,12 @@ def get_pattern(data, pat):
         for m in matches:
             print(m)
 
+
 def show_pos(text):
     doc = nlp(text)
     for t in doc:
         print(t, t.pos_, t.tag_)
+
 
 def description_sentences(data):
     for d in data:
@@ -99,7 +110,8 @@ def description_sentences(data):
 
 if __name__ == "__main__":
     # DATA = "../data/all_apartments.json"
-    DATA = "../../new-york-apartment/all_apartments.json"
+    # DATA = "../../new-york-apartment/all_apartments.json"
+    DATA = "all_apartments.json"
     with open(DATA, "r") as infile:
         data = json.load(infile)
 
@@ -110,4 +122,3 @@ if __name__ == "__main__":
     # get_pattern(data, r'<VB> <RB>')
 
     # show_pos("")
-

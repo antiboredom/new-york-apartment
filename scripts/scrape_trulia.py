@@ -245,11 +245,11 @@ if __name__ == "__main__":
     import argparse
     from pprint import pprint
 
-    # get_all_listings()
-    # consolidate_json_files()
+    get_all_listings()
+    consolidate_json_files()
     # get_floorplans()
 
-    results = get_listings(limit=20, offset=0, page=1, minprice=9_950_000, maxprice=9_950_000)
-    for r in results:
-        print('https://trulia.com' + r['url'])
-        print(r)
+    # results = get_listings(limit=20, offset=0, page=1, minprice=9_950_000, maxprice=9_950_000)
+    # for r in results:
+    #     print('https://trulia.com' + r['url'])
+    #     print(r)

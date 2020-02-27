@@ -14,22 +14,54 @@
     <meta property="og:title" content="New York Apartment" />
     <meta property="og:image" content="https://antiboredom.github.io/new-york-apartment/images/share.png" />
     <link rel="stylesheet" href="style.css?v=1.0" />
+    <script src="js/vue.min.js"></script>
+    <script src="js/tween.js"></script>
   </head>
 
   <body>
     <div class="container">
       <section id="meta-container">
         <h1 id="logo">New York Apartment</h1>
-        <h2 id="total-price">
-          <span>FOR SALE</span><br>
-          $47,558,777,359
-        </h2>
+        <div id="meta-app" v-cloak>
+          <h2 id="total-price">
+            <span>FOR SALE</span><br>
+            ${{price | format}}
+          </h2>
 
-        <div class="meta">
-          <p>74,388 bedrooms</p>
-          <p>77,371.5 bathrooms</p>
-          <p>40,638,630 sq ft</p>
+          <div class="meta">
+            <p>{{beds | format}} bedrooms</p>
+            <p>{{baths | format}} bathrooms</p>
+            <p>{{sqft | format}} sq ft</p>
+          </div>
         </div>
+
+        <script>
+          const MetaApp = new Vue({
+            el: "#meta-app",
+            data: {
+              price: 0,
+              beds: 0,
+              baths: 0,
+              sqft: 0,
+            },
+
+            async created() {
+              let response = await fetch("https://sam.nyc3.digitaloceanspaces.com/meta.json");
+              let meta = await response.json();
+              this.price = meta.price;
+              this.beds = meta.beds;
+              this.baths = meta.baths;
+              this.sqft = meta.sqft;
+            },
+
+            filters: {
+              format: function(num) {
+                num = num.toFixed(0);
+                return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+              },
+            },
+          });
+        </script>
 
         <div id="questions-to-consider">
           <p>Are you constantly frustrated with seeing the same low grade renovations and design choices in townhouses?</p>
@@ -14119,8 +14151,6 @@
       <iframe src=""></iframe>
     </div>
 
-    <script src="js/vue.min.js"></script>
-    <script src="js/tween.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
