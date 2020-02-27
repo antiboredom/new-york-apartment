@@ -12,3 +12,4 @@ docs/videos/*.mp4
 dirty_trulia_json
 scripts/all_apartments.json
 scripts/meta.json
+*.blend1
