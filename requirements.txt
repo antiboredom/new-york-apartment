@@ -22,7 +22,7 @@ numpy==1.17.2
 opencv-python==4.1.1.26
 OpenPySCAD==0.3.2
 parse==1.12.1
-Pillow==6.2.1
+Pillow==8.2.0
 plac==0.9.6
 preshed==3.0.2
 prettytable==0.7.2
