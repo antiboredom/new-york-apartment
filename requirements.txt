@@ -16,7 +16,7 @@ en-core-web-sm==2.2.0
 euclid3==0.1
 fake-useragent==0.1.11
 idna==2.8
-lxml==4.4.1
+lxml==4.6.5
 murmurhash==1.0.2
 numpy==1.17.2
 opencv-python==4.1.1.26
