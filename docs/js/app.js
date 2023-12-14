@@ -1,5 +1,5 @@
 const imgBase =
-  "https://sam.nyc3.digitaloceanspaces.com/apartment-images/https___static.trulia-cdn.com_pictures_thumbs_6_zillowstatic";
+  "https://artport.org/new-york-apartment/images/https___static.trulia-cdn.com_pictures_thumbs_6_zillowstatic";
 
 let meta = {
   // beds: 79445.0,
@@ -36,7 +36,7 @@ function chunkArray(array, size) {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 Vue.component("slideshow", {
@@ -194,8 +194,8 @@ const ContactApp = new Vue({
     contact() {
       const totalPerMessage = this.batchSize;
       const chunks = chunkArray(this.agents, totalPerMessage);
-      const urls = chunks.map(c => {
-        const numbers = c.map(a => a[1]).join(",");
+      const urls = chunks.map((c) => {
+        const numbers = c.map((a) => a[1]).join(",");
         return (url = `sms:/open?addresses=${numbers}&body=I'm interested in the New York Apartment`);
       });
 
@@ -213,8 +213,8 @@ const ContactApp = new Vue({
       if (confirm("Are you sure?")) {
         const totalPerMessage = this.batchSize;
         const chunks = chunkArray(this.agents, totalPerMessage);
-        const urls = chunks.map(c => {
-          const numbers = c.map(a => a[1]).join(",");
+        const urls = chunks.map((c) => {
+          const numbers = c.map((a) => a[1]).join(",");
           return (url = `sms:/open?addresses=${numbers}&body=I'm interested in the New York Apartment`);
         });
         for (let url of urls) {
@@ -280,7 +280,7 @@ Vue.component("animated-integer", {
           {
             tweeningValue: endValue,
           },
-          vm.time
+          vm.time,
         )
         .onUpdate(function() {
           vm.tweeningValue = this.tweeningValue.toFixed(0);
@@ -323,7 +323,9 @@ const CalculatorApp = new Vue({
   },
 
   async created() {
-    let response = await fetch("https://sam.nyc3.digitaloceanspaces.com/meta.json");
+    let response = await fetch(
+      "https://sam.nyc3.digitaloceanspaces.com/meta.json",
+    );
     meta = await response.json();
     this.price = meta.price;
     this.pricePerFoot = meta.price / meta.sqft;
@@ -364,7 +366,7 @@ const CalculatorApp = new Vue({
         this.percentOfSalary =
           (this.monthly / ((this.salary * 0.7) / 12)) * 100;
         this.percentageofApt = parseFloat(
-          ((0.3 * this.salary * 0.7) / this.monthly).toFixed(6)
+          ((0.3 * this.salary * 0.7) / this.monthly).toFixed(6),
         );
         this.sqftafford = this.percentageofApt * meta.sqft;
         this.brafford = this.percentageofApt * meta.beds;
@@ -492,7 +494,7 @@ async function setupQuestions() {
   let countdownTimeout = setTimeout(startEm, timeToStart);
   let questionInterval;
 
-  window.addEventListener("mousemove", e => {
+  window.addEventListener("mousemove", (e) => {
     for (let el of document.querySelectorAll(".question")) {
       document.body.removeChild(el);
     }
