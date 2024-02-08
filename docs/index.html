@@ -46,8 +46,9 @@
             },
 
             async created() {
-              let response = await fetch("https://sam.nyc3.digitaloceanspaces.com/meta.json");
-              let meta = await response.json();
+              // let response = await fetch("data/meta.json");
+              // let meta = await response.json();
+              let meta = {"beds": 65764.0, "baths": 55588.0, "sqft": 36672535.0, "price": 43869676331.0, "hoa": 23866796};
               this.price = meta.price;
               this.beds = meta.beds;
               this.baths = meta.baths;
@@ -5485,24 +5486,267 @@
       <section id="video-tours-container">
         <div class="inner-section">
           <h3>Video tour</h3>
-          <div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293182" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659883?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Welcome</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376295449?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>The apartment</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660085?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Beautiful</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293166?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Bedroom</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660169?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Kitchen</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293133?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Dining room</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293102?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Bathroom</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376293145?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Living room</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376295443?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Stainless steel</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660147?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Hardwood floor</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376660039?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Master</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659921?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Private</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659841?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Storage</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659798?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Renovated</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659767?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Pre-war</p></div>
-          <div class="vid-holder"><div class="responsive-video"><iframe src="https://player.vimeo.com/video/376659749?dnt=0&loop=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><p>Marble</p></div>
-          <script src="https://player.vimeo.com/api/player.js"></script>
+          <div class="responsive-video">
+            <video playsinline poster="https://artport.org/new-york-apartment/videos/tour.mp4.jpg" preload="none" controls loop>
+              <source src="https://artport.org/new-york-apartment/videos/tour.mp4.webm" type="video/webm" />
+              <source src="https://artport.org/new-york-apartment/videos/tour.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/welcome.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+                <source src="https://artport.org/new-york-apartment/videos/welcome.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/welcome.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Welcome</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/the-apartment.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+                <source src="https://artport.org/new-york-apartment/videos/the-apartment.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/the-apartment.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>The apartment</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/beautiful.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/beautiful.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/beautiful.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Beautiful</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/master-bedroom.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/master-bedroom.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/master-bedroom.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Bedroom</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/kitchen.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/kitchen.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/kitchen.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Kitchen</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/dining-room.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/dining-room.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/dining-room.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Dining room</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/bathroom.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/bathroom.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/bathroom.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Bathroom</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/living-room.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/living-room.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/living-room.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Living room</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/stainless-steel.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/stainless-steel.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/stainless-steel.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Stainless steel</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/hardwood.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/hardwood.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/hardwood.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Hardwood floor</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/master.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/master.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/master.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Master</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/private.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/private.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/private.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Private</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/storage.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/storage.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/storage.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Storage</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/renovated.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/renovated.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/renovated.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Renovated</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/prewar.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/prewar.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/prewar.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Pre-war</p>
+          </div>
+          <div class="vid-holder">
+            <div class="responsive-video">
+              <video
+                playsinline
+                poster="https://artport.org/new-york-apartment/videos/marble.mp4.jpg"
+                preload="none"
+                controls
+                loop
+              >
+
+                <source src="https://artport.org/new-york-apartment/videos/marble.mp4.webm" type="video/webm" />
+                <source src="https://artport.org/new-york-apartment/videos/marble.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p>Marble</p>
+          </div>
+
         </div>
       </section>
 

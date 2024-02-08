@@ -323,10 +323,17 @@ const CalculatorApp = new Vue({
   },
 
   async created() {
-    let response = await fetch(
-      "https://sam.nyc3.digitaloceanspaces.com/meta.json",
-    );
-    meta = await response.json();
+    // let response = await fetch(
+    //   "https://sam.nyc3.digitaloceanspaces.com/meta.json",
+    // );
+    // meta = await response.json();
+    let meta = {
+      beds: 65764.0,
+      baths: 55588.0,
+      sqft: 36672535.0,
+      price: 43869676331.0,
+      hoa: 23866796,
+    };
     this.price = meta.price;
     this.pricePerFoot = meta.price / meta.sqft;
     this.pricePerBedroom = meta.price / meta.beds;
