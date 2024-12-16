@@ -18,7 +18,7 @@ fake-useragent==0.1.11
 idna==2.8
 lxml==4.4.1
 murmurhash==1.0.2
-numpy==1.17.2
+numpy==1.22.0
 opencv-python==4.1.1.26
 OpenPySCAD==0.3.2
 parse==1.12.1
