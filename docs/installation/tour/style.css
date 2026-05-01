@@ -1,0 +1,116 @@
+html {
+  width: 100%;
+  height: 100%;
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   -webkit-touch-callout: none;
+}
+
+body {
+  margin: 0px;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+#floorplans-3d {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#clicktolock {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 988;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+#clicktolock img {
+  margin-top: 40px;
+  max-width: 200px;
+}
+
+#mobile-controls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 997;
+  display: none;
+}
+
+.ctrl {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px;
+  position: fixed;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  opacity: 0.5;
+}
+
+#f {
+  bottom: 100px;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+
+#b {
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+
+#l {
+  bottom: 60px;
+  left: 30%;
+}
+
+#r {
+  bottom: 60px;
+  right: 30%;
+}
+
+#u {
+  bottom: 100px;
+  right: 20px;
+}
+
+#d {
+  bottom: 20px;
+  right: 20px;
+}
+
+#desktop-instructions {
+  /* background-color: rgba(0, 0, 0, .8); */
+  background-color: rgba(238,255,255);
+  border-radius: 10px;
+  padding: 10px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+  opacity: 0.6;
+  display: none;
+}
+
+#desktop-instructions img {
+  width: 120px;
+  display: block;
+}

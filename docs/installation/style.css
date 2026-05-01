@@ -1,0 +1,564 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: 16px arial;
+  font-family: "Times New Roman";
+  background-color: #eee;
+  height: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 29px;
+  font-weight: normal;
+}
+
+.container {
+  /* max-width: 1100px; */
+  /* margin: auto; */
+  /* margin-top: 0px; */
+  position: relative;
+  z-index: 1;
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: row;
+  height: 100%;
+  align-items: top;
+  /* justify-content: center; */
+}
+
+#logo {
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin: 0;
+}
+
+#total-price {
+  font-size: 40px;
+  margin: 0;
+}
+
+#total-price span {
+  font-size: 0.5em;
+}
+
+.meta {
+  font-size: 29px;
+  line-height: 1.4;
+  margin-top: 17px;
+}
+
+.meta p {
+  margin: 0;
+}
+
+p.slide {
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+p.slide-2 {
+  margin-top: 0px;
+}
+
+p.total {
+}
+
+#imperatives-container {
+  min-width: 20vw;
+}
+
+#imperatives {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+
+#imperatives li {
+}
+
+#doors-container {
+  min-width: 20vw;
+  /* background-image: url('images/doors.jpg'); */
+  /* background-size: cover; */
+}
+
+#doors-container img {
+  width: 100%;
+  display: block;
+}
+
+#long-doors {
+  min-width: 40px;
+  padding: 0;
+  /* border-right: 20px solid #eee; */
+}
+
+#long-doors img {
+  width: 100%;
+  display: block;
+}
+
+#credits {
+  border-top: 1px solid #888;
+  padding-top: 10px;
+  color: #888;
+}
+
+#image-app-container {
+  /* height: 600px; */
+  display: flex;
+  width: 100%;
+}
+
+#image-app {
+  width: 100%;
+}
+
+.calc-table {
+  border-left: 10px solid #eee;
+  width: 100%;
+}
+
+.image-app {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 20px;
+}
+
+.image-app img {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.image-app .images-holder {
+  flex: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.image-cats-holder {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-cat {
+  text-transform: capitalize;
+}
+
+.image-nav {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.image-nav span {
+  background-color: #eee;
+  color: #000;
+  padding: 5px;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.image-nav:hover span {
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
+}
+
+select {
+  background-color: #fff;
+  border: 1px solid #000;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+section {
+  min-width: 42vw;
+  flex: 1;
+  height: 100%;
+  padding: 20px;
+  overflow-y: scroll;
+  /* border-right: 1px solid #000; */
+  background-color: #fff;
+  margin: 0px 10px;
+}
+
+.open-tour {
+  display: block;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.open-tour img {
+  position: relative;
+}
+
+.open-tour p {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  margin: 0;
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #000;
+  padding: 2px;
+}
+
+#meta-container {
+  /* min-width: 25vw; */
+  min-width: 360px;
+  width: 360px;
+}
+
+#image-app-container {
+  min-width: 46vw;
+}
+
+#about-listing-container {
+  min-width: 42vw;
+}
+
+#video-tours-container {
+  min-width: 52vw;
+}
+
+#agent-list {
+  margin-top: 10px;
+}
+
+#contact-app button {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#agent-list a {
+  -webkit-appearance: button;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: buttontext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  background-color: buttonface;
+  box-sizing: border-box;
+  margin: 0em;
+  font: 400 11px system-ui;
+  padding: 1px 7px 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  border-image: initial;
+  text-decoration: none;
+}
+
+#agent-list a {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  /* padding: 3px; */
+  /* font-size: 12px; */
+  /* background-color: #000; */
+  /* color: #fff; */
+  /* text-decoration: none; */
+  /* border: 1px solid transparent; */
+}
+
+#agent-list a:hover {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.inner-section {
+  /* margin-bottom: 20px; */
+}
+
+.inner-section img {
+  width: 100%;
+  display: block;
+}
+
+.has-bg {
+  /* padding: 10px; */
+  /* background-color: #fff; */
+}
+
+#neighborhoods {
+  font-size: 12px;
+}
+
+/* video { */
+/*   width: 100%; */
+/*   display: block; */
+/*   margin-bottom: 20px; */
+/* } */
+
+.responsive-video {
+  padding: 56.25% 0 0 0;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.vid-holder {
+  width: 50%;
+  padding: 5px;
+  float: left;
+  /* padding-bottom: 0px; */
+  /* padding-top: 0px; */
+}
+
+.vid-holder p {
+  margin: 0;
+  margin-top: -18px;
+}
+
+.responsive-video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+#features-list {
+  font-size: 14px;
+  column-count: 3;
+}
+
+#question-app-container {
+  /* max-width: 300px; */
+  /* width: 300px; */
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  font-size: 30px;
+}
+
+#questions-to-consider {
+  margin-top: 30px;
+}
+#questions-to-consider p {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.question {
+  position: fixed;
+  transition-timing-function: linear;
+  top: 0;
+  left: 0;
+  color: #fff;
+  background-color: #000;
+  padding: 2px;
+  white-space: pre;
+  z-index: 900;
+}
+
+#modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.85);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  z-index: 999;
+  flex-direction: column;
+  display: none;
+  color: #fff;
+}
+
+#modal h3 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+#close-modal {
+  color: #fff;
+}
+
+#modal iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#tour-instructions {
+  font-size: 0.9em;
+  color: #999;
+}
+
+#tour-instructions span {
+  color: #fff;
+  margin: 0px 10px;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+#calculator-app .total,
+#calculator-app .total input {
+  font-size: 24px;
+  color: #000;
+  background-color: rgba(238, 238, 238);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.calculate {
+  font-size: 25px;
+  /* width: 30%; */
+  /* box-shadow: 0px 0px 5px red; */
+  /* outline: 0.5px solid black; */
+  margin: 30px 0px;
+}
+.calc-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid rgb(238, 238, 238);
+}
+
+.calculator-input {
+  flex: 1;
+  min-width: 50%;
+}
+
+.calc-bold {
+  /* font-weight: bold; */
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+input[type="number"] {
+  width: 3rem;
+}
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 40%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #fe42ad; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #ff6437; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #ff6437; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+@media (max-width: 768px) {
+  section {
+    width: 85vw !important;
+    min-width: 85vw !important;
+    max-width: 85vw !important;
+    padding: 5px;
+    margin: 0px 5px;
+  }
+
+  #logo {
+    font-size: 40px;
+  }
+
+  #total-price {
+    font-size: 30px;
+  }
+
+  #features-container {
+    /* width: 50vw; */
+    /* min-width: 50vw; */
+    /* max-width: 50vw; */
+  }
+
+  #features-list {
+    font-size: 14px;
+    column-count: 1;
+  }
+
+  .vid-holder {
+    width: 100%;
+    padding: 0px;
+    float: none;
+    margin-bottom: 10px;
+  }
+
+  .image-app {
+    height: 250px;
+    margin-bottom: 20px;
+  }
+}

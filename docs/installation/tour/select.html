@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Apartment Virtual Tours</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+      .tours {
+        display: grid;
+        width: 100vw;
+        height: 100vh;
+        grid-template-columns: 50vw 50vw;
+        grid-template-rows: 50vh 50vh;
+
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          /* border: 0.5px solid #000; */
+        }
+      }
+      .open-tour {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        padding: 0.5px;
+        background-color: #000;
+      }
+
+      .open-tour img {
+        position: relative;
+      }
+
+      .open-tour p {
+        position: absolute;
+        top: 0;
+        left: 20px;
+        margin: 0;
+        padding: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #000;
+        padding: 2px;
+      }
+      #modal {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.85);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 5px;
+        z-index: 999;
+        flex-direction: column;
+        display: none;
+        color: #fff;
+      }
+
+      #modal h3 {
+        margin: 0;
+        font-weight: normal;
+        font-size: 20px;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+
+      #close-modal {
+        color: #fff;
+      }
+
+      #modal iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      #tour-instructions {
+        font-size: 0.9em;
+        color: #999;
+      }
+
+      #tour-instructions span {
+        color: #fff;
+        margin: 0px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tours">
+      <a href="#virtual-tour" class="open-tour" data-scene="flat"
+        ><img src="../images/flat.jpg" />
+        <p>Enter the apartment</p></a
+      >
+      <a href="#virtual-tour" class="open-tour" data-scene="fattower"
+        ><img src="../images/fattower.jpg" />
+        <p>Enter the apartment</p></a
+      >
+      <a href="#virtual-tour" class="open-tour" data-scene="pyramid"
+        ><img src="../images/pyramid.jpg" />
+        <p>Enter the apartment</p></a
+      >
+      <a href="#virtual-tour" class="open-tour" data-scene="tower"
+        ><img src="../images/tower.jpg" />
+        <p>Enter the apartment</p></a
+      >
+    </div>
+
+    <div id="modal">
+      <div class="modal-header">
+        <h3>Explore your future home</h3>
+        <a href="#" id="close-modal">Close</a>
+      </div>
+      <iframe src=""></iframe>
+    </div>
+    <script>
+      const modal = document.querySelector("#modal");
+      const closeModal = document.querySelector("#close-modal");
+      const openModalButtons = document.querySelectorAll(".open-tour");
+      const frame = document.querySelector("#modal iframe");
+
+      function addTourListener(b) {
+        b.addEventListener("click", function (e) {
+          e.preventDefault();
+          frame.src = "index.html?scene=" + b.dataset.scene;
+          modal.style.display = "flex";
+        });
+      }
+
+      function onCloseModal() {
+        frame.src = "";
+        modal.style.display = "none";
+      }
+
+      for (let b of openModalButtons) {
+        addTourListener(b);
+      }
+
+      closeModal.addEventListener("click", function (e) {
+        e.preventDefault();
+        onCloseModal();
+      });
+
+      window.addEventListener("keydown", function (e) {
+        if (e.key == "Escape") {
+          onCloseModal();
+        }
+      });
+
+      window.onmessage = function (e) {
+        if (e.data == "escape") {
+          onCloseModal();
+        }
+      };
+    </script>
+  </body>
+</html>
