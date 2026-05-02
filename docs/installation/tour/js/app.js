@@ -57,7 +57,7 @@ let currentScene = scenes[getUrlParameter("scene")] || scenes.flat;
 const walkingSpeed = currentScene.speed || defaults.speed;
 
 function loadGLTF(url) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     loader.load(url, resolve);
   });
 }
@@ -72,20 +72,9 @@ function getUrlParameter(name) {
 }
 
 function addClickLock() {
-  document.body.addEventListener(
-    "click",
-    function() {
-      document.querySelector("#clicktolock").style.display = "none";
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        document.querySelector("#mobile-controls").style.display = "block";
-      } else {
-        document.querySelector("#desktop-instructions").style.display = "block";
-      }
-      controls.lock();
-    },
-    false
-  );
-  document.querySelector("#msg").textContent = "Click to start.";
+  document.querySelector("#clicktolock").style.display = "none";
+  document.querySelector("#mobile-controls").style.display = "block";
+  document.querySelector("#msg").textContent = "Tap to start.";
 }
 
 class Player {
@@ -126,57 +115,57 @@ class Player {
   }
 
   setListeners() {
-    document.querySelector("#u").addEventListener("touchstart", e => {
+    document.querySelector("#u").addEventListener("touchstart", (e) => {
       this.moveDown = true;
     });
 
-    document.querySelector("#u").addEventListener("touchend", e => {
+    document.querySelector("#u").addEventListener("touchend", (e) => {
       this.moveDown = false;
     });
 
-    document.querySelector("#d").addEventListener("touchstart", e => {
+    document.querySelector("#d").addEventListener("touchstart", (e) => {
       this.moveUp = true;
     });
 
-    document.querySelector("#d").addEventListener("touchend", e => {
+    document.querySelector("#d").addEventListener("touchend", (e) => {
       this.moveUp = false;
     });
 
-    document.querySelector("#l").addEventListener("touchstart", e => {
+    document.querySelector("#l").addEventListener("touchstart", (e) => {
       this.moveLeft = true;
     });
 
-    document.querySelector("#l").addEventListener("touchend", e => {
+    document.querySelector("#l").addEventListener("touchend", (e) => {
       this.moveLeft = false;
     });
 
-    document.querySelector("#r").addEventListener("touchstart", e => {
+    document.querySelector("#r").addEventListener("touchstart", (e) => {
       this.moveRight = true;
     });
 
-    document.querySelector("#r").addEventListener("touchend", e => {
+    document.querySelector("#r").addEventListener("touchend", (e) => {
       this.moveRight = false;
     });
 
-    document.querySelector("#f").addEventListener("touchstart", e => {
+    document.querySelector("#f").addEventListener("touchstart", (e) => {
       this.moveForward = true;
     });
 
-    document.querySelector("#f").addEventListener("touchend", e => {
+    document.querySelector("#f").addEventListener("touchend", (e) => {
       this.moveForward = false;
     });
 
-    document.querySelector("#b").addEventListener("touchstart", e => {
+    document.querySelector("#b").addEventListener("touchstart", (e) => {
       this.moveBackward = true;
     });
 
-    document.querySelector("#b").addEventListener("touchend", e => {
+    document.querySelector("#b").addEventListener("touchend", (e) => {
       this.moveBackward = false;
     });
 
     document.addEventListener(
       "keydown",
-      event => {
+      (event) => {
         switch (event.keyCode) {
           case 38: // up
           case 87: // w
@@ -202,12 +191,12 @@ class Player {
             break;
         }
       },
-      false
+      false,
     );
 
     document.addEventListener(
       "keyup",
-      event => {
+      (event) => {
         switch (event.keyCode) {
           case 38: // up
           case 87: // w
@@ -233,7 +222,7 @@ class Player {
             break;
         }
       },
-      false
+      false,
     );
   }
 }
@@ -259,7 +248,7 @@ async function init() {
   const ambientLight = new THREE.HemisphereLight(
     0xffffff, // ground color
     0x000000, // sky color
-    2.4 // intensity
+    2.4, // intensity
   );
 
   scene.add(ambientLight);
@@ -293,14 +282,14 @@ async function init() {
   camera.position.set(
     currentScene.start[0],
     currentScene.start[1],
-    currentScene.start[2]
+    currentScene.start[2],
   );
   camera.lookAt(
     new THREE.Vector3(
       currentScene.look[0],
       currentScene.look[1],
-      currentScene.look[2]
-    )
+      currentScene.look[2],
+    ),
   );
 
   try {
@@ -344,7 +333,7 @@ async function init() {
     }),
   ];
 
-  towerMesh.traverse(o => {
+  towerMesh.traverse((o) => {
     if (o.isMesh) {
       o.material = mats[Math.floor(Math.random() * mats.length)];
       // const edges = new THREE.EdgesGeometry(o.geometry); // or WireframeGeometry
