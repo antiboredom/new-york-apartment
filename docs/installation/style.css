@@ -75,8 +75,7 @@ p.slide-2 {
   margin-top: 0px;
 }
 
-p.total {
-}
+p.total {}
 
 #imperatives-container {
   min-width: 20vw;
@@ -89,8 +88,7 @@ p.total {
   font-size: 13px;
 }
 
-#imperatives li {
-}
+#imperatives li {}
 
 #doors-container {
   min-width: 20vw;
@@ -204,10 +202,25 @@ section {
   flex: 1;
   height: 100%;
   padding: 20px;
+  padding-bottom: 40px;
   overflow-y: scroll;
   /* border-right: 1px solid #000; */
   background-color: #fff;
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+  height: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
 }
 
 .open-tour {
@@ -377,11 +390,13 @@ section {
 #questions-to-consider {
   margin-top: 30px;
 }
+
 #questions-to-consider p {
   margin: 0;
   margin-bottom: 10px;
   font-size: 14px;
 }
+
 .question {
   position: fixed;
   transition-timing-function: linear;
@@ -460,6 +475,7 @@ section {
   /* outline: 0.5px solid black; */
   margin: 30px 0px;
 }
+
 .calc-grid {
   display: flex;
   flex-wrap: wrap;
@@ -484,42 +500,60 @@ input[type="number"] {
 }
 
 .slidecontainer {
-  width: 100%; /* Width of the outside container */
+  width: 100%;
+  /* Width of the outside container */
 }
 
 /* The slider itself */
 .slider {
-  -webkit-appearance: none; /* Override default CSS styles */
+  -webkit-appearance: none;
+  /* Override default CSS styles */
   appearance: none;
-  width: 40%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #fe42ad; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  width: 40%;
+  /* Full-width */
+  height: 25px;
+  /* Specified height */
+  background: #fe42ad;
+  /* Grey background */
+  outline: none;
+  /* Remove outline */
+  opacity: 0.7;
+  /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s;
+  /* 0.2 seconds transition on hover */
   transition: opacity 0.2s;
 }
 
 /* Mouse-over effects */
 .slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+  opacity: 1;
+  /* Fully shown on mouse-over */
 }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none;
+  /* Override default look */
   appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #ff6437; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  /* Slider handle height */
+  background: #ff6437;
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #ff6437; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  /* Slider handle height */
+  background: #ff6437;
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
 }
 
 @media (max-width: 768px) {
