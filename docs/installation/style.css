@@ -186,7 +186,7 @@ p.total {}
   font-weight: bold;
 }
 
-.image-nav:hover span {
+.image-nav:active span {
   background-color: #000;
   color: #fff;
   padding: 10px;
