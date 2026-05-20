@@ -189,7 +189,7 @@ p.total {}
 .image-nav:hover span {
   background-color: #000;
   color: #fff;
-  padding: 5px;
+  padding: 10px;
   margin: 5px;
 }
 
