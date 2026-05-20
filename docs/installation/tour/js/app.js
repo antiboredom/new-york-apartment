@@ -115,52 +115,54 @@ class Player {
   }
 
   setListeners() {
-    document.querySelector("#u").addEventListener("touchstart", (e) => {
-      this.moveDown = true;
-    });
+    const buttons = [
+      { id: "#u", downProp: "moveDown", upProp: null },
+      { id: "#d", downProp: "moveUp", upProp: null },
+      { id: "#l", downProp: "moveLeft", upProp: null },
+      { id: "#r", downProp: "moveRight", upProp: null },
+      { id: "#f", downProp: "moveForward", upProp: null },
+      { id: "#b", downProp: "moveBackward", upProp: null },
+    ];
 
-    document.querySelector("#u").addEventListener("touchend", (e) => {
-      this.moveDown = false;
-    });
+    const stop = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
 
-    document.querySelector("#d").addEventListener("touchstart", (e) => {
-      this.moveUp = true;
-    });
+    buttons.forEach(({ id, downProp }) => {
+      const el = document.querySelector(id);
 
-    document.querySelector("#d").addEventListener("touchend", (e) => {
-      this.moveUp = false;
-    });
-
-    document.querySelector("#l").addEventListener("touchstart", (e) => {
-      this.moveLeft = true;
-    });
-
-    document.querySelector("#l").addEventListener("touchend", (e) => {
-      this.moveLeft = false;
-    });
-
-    document.querySelector("#r").addEventListener("touchstart", (e) => {
-      this.moveRight = true;
-    });
-
-    document.querySelector("#r").addEventListener("touchend", (e) => {
-      this.moveRight = false;
-    });
-
-    document.querySelector("#f").addEventListener("touchstart", (e) => {
-      this.moveForward = true;
-    });
-
-    document.querySelector("#f").addEventListener("touchend", (e) => {
-      this.moveForward = false;
-    });
-
-    document.querySelector("#b").addEventListener("touchstart", (e) => {
-      this.moveBackward = true;
-    });
-
-    document.querySelector("#b").addEventListener("touchend", (e) => {
-      this.moveBackward = false;
+      el.addEventListener(
+        "touchstart",
+        (e) => {
+          stop(e);
+          this[downProp] = true;
+        },
+        { passive: false },
+      );
+      el.addEventListener(
+        "touchend",
+        (e) => {
+          stop(e);
+          this[downProp] = false;
+        },
+        { passive: false },
+      );
+      el.addEventListener(
+        "touchcancel",
+        (e) => {
+          stop(e);
+          this[downProp] = false;
+        },
+        { passive: false },
+      );
+      el.addEventListener(
+        "touchmove",
+        (e) => {
+          stop(e);
+        },
+        { passive: false },
+      );
     });
 
     document.addEventListener(
