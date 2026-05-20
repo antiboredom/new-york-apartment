@@ -1,5 +1,8 @@
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: pan-x pan-y;
 }
 
 html {
@@ -177,9 +180,9 @@ p.total {}
 .image-nav span {
   background-color: #eee;
   color: #000;
-  padding: 5px;
+  padding: 10px;
   margin: 5px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -554,6 +557,10 @@ input[type="number"] {
   /* Green background */
   cursor: pointer;
   /* Cursor on hover */
+}
+
+#features-container {
+  overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
