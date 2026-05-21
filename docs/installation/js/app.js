@@ -570,10 +570,26 @@ function autoRefresh(seconds = 60) {
     "wheel",
   ];
 
+  const resetScrolls = () => {
+    const hasScrolledLeft = document.scrollingElement.scrollLeft > 0;
+    const hasScrolledDown = [...document.querySelectorAll("section")].some(
+      (el) => el.scrollTop > 0,
+    );
+
+    if (hasScrolledDown || hasScrolledLeft) {
+      window.location.href = window.location.href;
+    }
+    // document.scrollingElement.scrollLeft = 0;
+    // document.querySelectorAll("section").forEach((el) => {
+    //   el.scrollTop = 0;
+    // });
+  };
+
   const reset = () => {
     clearTimeout(timer);
     timer = setTimeout(
-      () => (window.location.href = window.location.href),
+      // () => (window.location.href = window.location.href),
+      resetScrolls,
       seconds * 1000,
     );
   };
@@ -582,7 +598,7 @@ function autoRefresh(seconds = 60) {
     window.addEventListener(event, reset, { passive: true }),
   );
 
-  reset(); // Start the timer immediately
+  reset();
 }
 
 autoRefresh(60);
