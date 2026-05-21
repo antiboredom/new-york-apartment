@@ -552,3 +552,37 @@ window.onmessage = function(e) {
     onCloseModal();
   }
 };
+
+function autoRefresh(seconds = 60) {
+  let timer;
+
+  const events = [
+    "mousemove",
+    "mousedown",
+    "mouseup",
+    "keydown",
+    "scroll",
+    "touchstart",
+    "touchmove",
+    "touchend",
+    "touchcancel",
+    "click",
+    "wheel",
+  ];
+
+  const reset = () => {
+    clearTimeout(timer);
+    timer = setTimeout(
+      () => (window.location.href = window.location.href),
+      seconds * 1000,
+    );
+  };
+
+  events.forEach((event) =>
+    window.addEventListener(event, reset, { passive: true }),
+  );
+
+  reset(); // Start the timer immediately
+}
+
+autoRefresh(60);
