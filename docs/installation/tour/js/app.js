@@ -16,6 +16,10 @@ let dracoLoader = new THREE.DRACOLoader();
 dracoLoader.setDecoderPath("draco/");
 loader.setDRACOLoader(dracoLoader);
 
+let isActive = false;
+let activityTimer;
+const RESETTIME = 60;
+
 const defaults = {
   fov: 35,
   dist: 1000,
@@ -136,6 +140,8 @@ class Player {
         "touchstart",
         (e) => {
           stop(e);
+          isActive = true;
+          resetActivityTimer();
           this[downProp] = true;
         },
         { passive: false },
@@ -144,6 +150,8 @@ class Player {
         "touchend",
         (e) => {
           stop(e);
+          isActive = false;
+          resetActivityTimer();
           this[downProp] = false;
         },
         { passive: false },
@@ -152,6 +160,8 @@ class Player {
         "touchcancel",
         (e) => {
           stop(e);
+          isActive = false;
+          resetActivityTimer();
           this[downProp] = false;
         },
         { passive: false },
@@ -160,6 +170,8 @@ class Player {
         "touchmove",
         (e) => {
           stop(e);
+          isActive = true;
+          resetActivityTimer();
         },
         { passive: false },
       );
@@ -413,6 +425,9 @@ async function init() {
   if (getUrlParameter("gui")) {
     makeGUI();
   }
+
+  // autoRefresh(5);
+  resetActivityTimer();
 }
 
 function animate() {
@@ -424,6 +439,32 @@ function animate() {
   // renderer.render(scene, camera);
   effect.render(scene, camera);
 }
+
+function resetActivityTimer() {
+  clearTimeout(activityTimer);
+  if (!isActive) {
+    activityTimer = setTimeout(
+      () => window.top.location.reload(),
+      RESETTIME * 1000,
+    );
+  }
+}
+
+[
+  "mousemove",
+  "mousedown",
+  "mouseup",
+  "keydown",
+  "scroll",
+  "touchstart",
+  "touchend",
+  "touchcancel",
+  "touchmove",
+  "click",
+  "wheel",
+].forEach((event) => {
+  window.addEventListener(event, resetActivityTimer, { passive: true });
+});
 
 function onWindowResize() {
   camera.aspect = container.clientWidth / container.clientHeight;
